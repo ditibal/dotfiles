@@ -1,0 +1,77 @@
+priority -40
+
+snippet am "array_map"
+$${1:items} = array_map(function($${2:i}) {
+	${0}
+	return $$2;
+}, $$1);
+endsnippet
+
+snippet ?= "<?= ${0} ?>" i
+<?= ${0} ?>
+endsnippet
+
+snippet ?
+<?php ${0} ?>
+endsnippet
+
+snippet ?f
+<?php foreach ($${1:items} as $${2:item}): ?>
+	${0:${VISUAL}}
+<?php endforeach; ?>
+endsnippet
+
+snippet ?i
+<?php if ($${1:var}): ?>
+	${0:${VISUAL}}
+<?php endif ?>
+endsnippet
+
+snippet t. "" i
+$this->
+endsnippet
+
+snippet pub "Public function" b
+public function ${1:name}(${2:$param})
+{
+	${VISUAL}${3:return null;}
+}
+endsnippet
+
+snippet pubs "Public static function" b
+public static function ${1:name}(${2:$param})
+{
+	${VISUAL}${3:return null;}
+}
+$0
+endsnippet
+
+snippet ifem "if (empty(condition)) { ... }"
+if (empty($$1)) {
+	$0
+}
+endsnippet
+
+snippet ifis "if (isset(condition)) { ... }"
+if (isset($$1)) {
+	$0
+}
+endsnippet
+
+snippet ifnem "if (!empty(condition)) { ... }"
+if (!empty($$1)) {
+	$0
+}
+endsnippet
+
+snippet ifnis "if (!isset(condition)) { ... }"
+if (!isset($$1)) {
+	$0
+}
+endsnippet
+
+post_expand "snip.buffer[snip.snippet_end[0]+1:snip.snippet_end[0]+1] = ['']"
+snippet d "Description" b
+def $1():
+ $2
+endsnippet
