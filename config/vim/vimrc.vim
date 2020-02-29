@@ -15,8 +15,7 @@ set nocompatible             " No to the total compatibility with the ancient vi
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
-Plug 'joedicastro/vim-molokai256'
-Plug 'tomasr/molokai'
+Plug 'ayu-theme/ayu-vim'
 
 " Autocompletion of (, [, {, ', ", ...
 Plug 'Raimondi/delimitMate'

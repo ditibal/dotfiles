@@ -155,19 +155,15 @@ nmap <silent><Leader>ew :call ToggleWrap()<CR>
 " Colorscheme {{{
 
 syntax enable                  " enable the syntax highlight
-set background=dark            " set a dark background
-set t_Co=256                   " 256 colors for the terminal
-if has('gui_running')
-    colorscheme molokai
-else
-    colorscheme molokai256
-    set t_ut=
-endif
+
+set termguicolors     " enable true colors support
+let ayucolor="mirage" " for mirage version of theme
+colorscheme ayu
 " }}}
 
 " Font {{{
 
-set guifont=Dejavu\ Sans\ Mono\ for\ Powerline\ 13
+set guifont=Jetbrains\ Mono\ 16
 
 " }}}
 
