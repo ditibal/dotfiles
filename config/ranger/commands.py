@@ -89,3 +89,30 @@ class fzf_select(Command):
                 self.fm.cd(fzf_file)
             else:
                 self.fm.select_file(fzf_file)
+
+class move_watched(Command):
+    """
+
+    Перенос файла в папку просмотреных
+
+    """
+    def execute(self):
+        import transmissionrpc
+
+        path = os.getenv('TRANSMISSION_PATH')
+        host = os.getenv('TRANSMISSION_HOST')
+        port = os.getenv('TRANSMISSION_PORT')
+        user = os.getenv('TRANSMISSION_USER')
+        password = os.getenv('TRANSMISSION_PASSWORD')
+
+        if (not all([path, host, port, user, password])):
+            self.fm.notify("You may need to configure", bad=True)
+            return
+
+        tc = transmissionrpc.Client(host, port=port, user=user, password=password)
+
+        selected = [ f.basename for f in self.fm.thistab.get_selection() ]
+        torrents = [ t for t in tc.get_torrents() if t.name in selected ]
+
+        for t in torrents:
+            t.move_data(path + '/.completed')
