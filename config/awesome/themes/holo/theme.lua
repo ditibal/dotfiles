@@ -9,7 +9,7 @@ theme                               = {}
 
 theme.icon_dir                      = os.getenv("HOME") .. "/.config/awesome/themes/holo/icons"
 
-theme.wallpaper                     = os.getenv("HOME") .. "/.config/awesome/themes/holo/bg.png"
+theme.wallpaper                     = os.getenv("HOME") .. "/.config/awesome/themes/holo/clean.jpg"
 
 theme.topbar_path                   = "png:" .. theme.icon_dir .. "/topbar/"
 

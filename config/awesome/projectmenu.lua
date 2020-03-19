@@ -4,11 +4,8 @@ local items = {}
 local projects = {
     {'autoshina', '/var/www/autoshinavrn.ru'},
     {'autoshina.local', '/var/www/autoshinavrn.local.ru'},
-    {'rembox', '/var/www/rembox.ru'},
+    {'rembox.ru', '/var/www/rembox.ru'},
     {'rembox.local', '/var/www/rembox.l.ru'},
-    {'rembox.abcp', '/var/www/rembox.abcp.ru'},
-    {'rembox.services', '/var/www/rembox.services.ru'},
-    {'rembox.spareparts', '/var/www/rembox.spareparts.ru'},
 }
 
 for _, i in pairs(projects) do

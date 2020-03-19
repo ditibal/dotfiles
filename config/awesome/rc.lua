@@ -358,12 +358,12 @@ globalkeys = awful.util.table.join(
             awful.tag.viewnext()
         end),
 
-    awful.key({ modkey }, "j",
+    awful.key({ modkey }, "k",
         function ()
             awful.client.focus.byidx( 1)
         end),
 
-    awful.key({ modkey }, "k",
+    awful.key({ modkey }, "j",
         function ()
             awful.client.focus.byidx(-1)
         end),
