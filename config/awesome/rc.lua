@@ -370,12 +370,12 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey }, "Page_Up",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx(-1)
         end),
 
     awful.key({ modkey }, "Page_Down",
         function ()
-            awful.client.focus.byidx(-1)
+            awful.client.focus.byidx( 1)
         end),
 
     awful.key({ modkey }, "w",

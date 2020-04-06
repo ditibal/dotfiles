@@ -163,7 +163,7 @@ colorscheme ayu
 
 " Font {{{
 
-set guifont=Jetbrains\ Mono\ 16
+set guifont=Jetbrains\ Mono\ 14
 
 " }}}
 
@@ -394,6 +394,7 @@ nnoremap Y y$
 
 " hotkeys for tabs {{{
 
+map q :quit<CR>
 map tn :tabnew<CR>
 map tc :tabclose<CR>
 map <M-j> :tabprev<CR>
