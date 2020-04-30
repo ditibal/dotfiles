@@ -368,6 +368,26 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
         end),
 
+    awful.key({ modkey }, "Left",
+        function ()
+            awful.tag.viewprev()
+        end),
+
+    awful.key({ modkey }, "Right",
+        function ()
+            awful.tag.viewnext()
+        end),
+
+    awful.key({ modkey }, "Down",
+        function ()
+            awful.client.focus.byidx( 1)
+        end),
+
+    awful.key({ modkey }, "Up",
+        function ()
+            awful.client.focus.byidx(-1)
+        end),
+
     awful.key({ modkey }, "Page_Up",
         function ()
             awful.client.focus.byidx(-1)
