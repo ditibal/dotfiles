@@ -80,8 +80,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Shougo/vimfiler', { 'on' : 'VimFiler' }
 
 " Powerful and advanced Snippets tool
-Plug 'SirVer/ultisnips'
-" Plug 'SirVer/ultisnips', {'tag': '3.2', 'dir': get(g:, 'plug_home', '~/.vim/bundle') . '/ultisnips_py2' }
+Plug 'SirVer/ultisnips', {'tag': '3.2'}
 
 " TODO: записать в шапаргалку снипеты
 " Snippets for Ultisnips
