@@ -109,7 +109,6 @@ Plug 'Shougo/unite-outline'
 " Plugin to display the indention levels with thin vertical lines
 Plug 'Yggdroot/indentLine'
 
-" Syntax highlight {{{
 " vue
 Plug 'posva/vim-vue'
 
