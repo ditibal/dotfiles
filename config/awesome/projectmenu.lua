@@ -35,4 +35,12 @@ table.insert(items, {
     }
 })
 
+table.insert(items, {
+    text = 'rembox',
+    keys = {
+        t = "xterm -e /bin/fish -C \"cd ~/tmp/rembox\"",
+        r = "xterm -e /bin/fish -c \"ranger ~/tmp/rembox\"",
+    }
+})
+
 return mmenu({items = items})
