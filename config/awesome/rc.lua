@@ -169,20 +169,10 @@ myawesomemenu = {
     { "restart", awesome.restart }
 }
 
-configsmenu = {
-    { "vim", "xvim ~/.vimrc" },
-    { "awesome", "xvim " .. cfg_dir .. "/rc.lua" },
-    { "ranger", "xvim ~/.config/ranger/rc.conf" },
-    { "bashrc", "xvim ~/.bashrc" },
-    { "bashrc locale", "xvim ~/.bashrc_locale" },
-}
-
 mymainmenu = awful.menu({
     items = {
-        { "chromium", "/home/ditibal/bin/chromium" },
-        { "configs", configsmenu },
+        { "dotfiles", "xterm -e /bin/fish -c \"ranger ~/dotfiles\"" },
         { "awesome", myawesomemenu },
-        { "fbless", "xterm fbless" }
     }
 })
 
