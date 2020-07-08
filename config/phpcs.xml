@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+    <!-- <arg name="basepath" value="."/> -->
+    <arg name="parallel" value="75"/>
+    <!-- <arg value="np"/> -->
+
+    <rule ref="Generic">
+        <exclude name="Generic.Files.LowercasedFilename.NotFound" />
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
+        <exclude name="Generic.Files.EndFileNoNewline.Found" />
+        <exclude name="Generic.PHP.UpperCaseConstant.Found" />
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+        <exclude name="Generic.PHP.ClosingPHPTag.NotFound" />
+        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine" />
+        <exclude name="Generic.PHP.RequireStrictTypes.MissingDeclaration" />
+        <exclude name="Generic.Classes.OpeningBraceSameLine.BraceOnNewLine" />
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
+        <exclude name="Generic.Formatting.SpaceAfterNot.Incorrect" />
+        <exclude name="Generic.Files.LineLength.TooLong" />
+        <exclude name="Generic.Metrics.CyclomaticComplexity.TooHigh" />
+        <exclude name="Generic.Files.InlineHTML.Found" />
+        <exclude name="Generic.PHP.DisallowShortOpenTag.EchoFound" />
+        <exclude name="Generic.Arrays.ArrayIndent.KeyIncorrect" />
+        <exclude name="Generic.Arrays.ArrayIndent.CloseBraceIncorrect" />
+        <exclude name="Generic.Formatting.NoSpaceAfterCast.SpaceFound" />
+    </rule>
+
+    <rule ref="Squiz">
+        <exclude name="Squiz.NamingConventions.ValidVariableName.PublicHasUnderscore" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed" />
+        <exclude name="Squiz.Commenting.ClassComment.Missing" />
+        <exclude name="Squiz.Files.FileExtension.ClassFound" />
+        <exclude name="Squiz.Commenting.FileComment.Missing" />
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.AfterLast" />
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose" />
+        <exclude name="Squiz.WhiteSpace.ObjectOperatorSpacing.Before" />
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed" />
+        <exclude name="Squiz.Commenting.FunctionComment.Missing" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.After" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst" />
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceBeforeEquals" />
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceAfterEquals" />
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue" />
+        <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound" />
+        <exclude name="Squiz.Formatting.OperatorBracket.MissingBrackets" />
+        <exclude name="Squiz.PHP.DisallowInlineIf.Found" />
+        <exclude name="Squiz.Commenting.LongConditionClosingComment.Missing" />
+        <exclude name="Squiz.Commenting.VariableComment.Missing" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed" />
+        <exclude name="Squiz.WhiteSpace.MemberVarSpacing.Incorrect" />
+        <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps" />
+        <exclude name="Squiz.WhiteSpace.MemberVarSpacing.FirstIncorrect" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned" />
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeNestedClose" />
+        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseParenthesis" />
+        <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
+        <exclude name="Squiz.PHP.DisallowComparisonAssignment.AssignedComparison" />
+        <exclude name="Squiz.ControlStructures.ElseIfDeclaration.NotAllowed" />
+        <exclude name="Squiz.Commenting.BlockComment.NoNewLine" />
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeEnd" />
+        <exclude name="Squiz.PHP.DisallowBooleanStatement.Found" />
+        <exclude name="Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine" />
+        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword" />
+        <exclude name="Squiz.PHP.DisallowComparisonAssignment.AssignedBool" />
+        <exclude name="Squiz.Objects.ObjectInstantiation.NotAssigned" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.KeySpecified" />
+    </rule>
+
+    <rule ref="PEAR">
+        <exclude name="PEAR.Commenting.FunctionComment.Missing" />
+        <exclude name="PEAR.Commenting.ClassComment.Missing" />
+        <exclude name="PEAR.Commenting.FileComment.Missing" />
+        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore" />
+        <exclude name="PEAR.NamingConventions.ValidVariableName.PublicUnderscore" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments" />
+        <exclude name="Zend.Files.ClosingTag.NotAllowed" />
+        <exclude name="PEAR.ControlStructures.MultiLineCondition.SpaceBeforeOpenBrace" />
+    </rule>
+</ruleset>
