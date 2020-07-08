@@ -10,8 +10,6 @@ set nocompatible             " No to the total compatibility with the ancient vi
 " TODO: С+down: 5-down
 " TODO: php fold
 
-" plug {{{ ===============================================================
-
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
@@ -139,8 +137,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'lfilho/cosco.vim'
 
 call plug#end()
-
-" END plug }}}
 
 source ~/.config/vim/general.vim
 
