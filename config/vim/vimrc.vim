@@ -116,25 +116,13 @@ Plug 'posva/vim-vue'
 " syntax for php
 Plug 'stanangeloff/php.vim'
 
-" json
-" Plug 'elzr/vim-json', {'for' : 'json'}
-" }}}
-
-" Plug 'seletskiy/vim-pythonx'
-
 Plug 'tpope/vim-abolish'
 
 Plug 'alvan/vim-php-manual'
 
-Plug 'mikehaertl/yii2-apidoc-vim'
-
-Plug 'chr4/nginx.vim'
-
 Plug 'digitaltoad/vim-pug'
 
 Plug 'AndrewRadev/splitjoin.vim'
-
-Plug 'lfilho/cosco.vim'
 
 call plug#end()
 
