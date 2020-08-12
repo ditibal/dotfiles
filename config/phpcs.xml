@@ -23,6 +23,7 @@
         <exclude name="Generic.Arrays.ArrayIndent.KeyIncorrect" />
         <exclude name="Generic.Arrays.ArrayIndent.CloseBraceIncorrect" />
         <exclude name="Generic.Formatting.NoSpaceAfterCast.SpaceFound" />
+        <exclude name="Generic.Formatting.SpaceBeforeCast.NoSpace" />
     </rule>
 
     <rule ref="Squiz">
