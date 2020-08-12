@@ -447,19 +447,10 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
-    -- Capture screen
+    -- Capture screen to buffer
     awful.key({ }, "Print",
         function ()
-            naughty.notify({
-                title = "imgur-screenshot",
-                text = "Please select area!",
-                timeout = 3,
-                ontop = false,
-                run = function (n)
-                    n.die()
-                    awful.spawn("/home/ditibal/bin/imgur-screenshot/imgur-screenshot.sh")
-                end
-            })
+            awful.spawn("/usr/bin/bash -c \" sleep 0.2 && scrot -sf /tmp/scrot-screenshot.png -e 'xclip -selection c -t image/png < $f' && rm /tmp/scrot-screenshot.png  \"")
         end),
 
     -- -- copy music to ~/_phone
