@@ -7,6 +7,10 @@ $${1:items} = array_map(function($${2:i}) {
 }, $$1);
 endsnippet
 
+snippet ac "array_column"
+$${3:items} = array_column($${1:input}, '${2:column_key}');
+endsnippet
+
 snippet ?= "<?= ${0} ?>" i
 <?= ${0} ?>
 endsnippet
@@ -38,14 +42,6 @@ public function ${1:name}(${2:$param})
 }
 endsnippet
 
-snippet pubs "Public static function" b
-public static function ${1:name}(${2:$param})
-{
-	${VISUAL}${3:return null;}
-}
-$0
-endsnippet
-
 snippet ifem "if (empty(condition)) { ... }"
 if (empty($$1)) {
 	$0
@@ -70,8 +66,78 @@ if (!isset($$1)) {
 }
 endsnippet
 
-post_expand "snip.buffer[snip.snippet_end[0]+1:snip.snippet_end[0]+1] = ['']"
-snippet d "Description" b
-def $1():
- $2
+global !p
+
+def camel_case_to_snake_case(name):
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+
+endglobal
+
+snippet activerecord "ActiveRecord class" b
+<?php
+
+namespace `!p
+dirname = os.path.dirname(path)
+
+if dirname:
+	snip.rv = dirname.replace('/', '\\')
+`;
+
+use Yii;
+use yii\db\ActiveRecord;
+
+class `!p snip.rv = re.match(r'.*(?=\.)', fn).group()` extends ActiveRecord
+{
+    public static function tableName()
+    {
+        return '`!p snip.rv = camel_case_to_snake_case(re.match(r'.*(?=\.)', fn).group())`';
+    }
+
+    public function rules()
+    {
+        return [];
+    }
+
+}
+endsnippet
+
+snippet d "dump" b
+d($$0);
+endsnippet
+
+snippet ?d "dump" b
+<?php d($$0); ?>
+endsnippet
+
+snippet >lj "->leftJoin" b
+->leftJoin('${1:table}', '${2:table.id} = ${3:id}')
+endsnippet
+
+snippet >andw "->andWhere" b
+->andWhere(['$1' => '$2'])
+endsnippet
+
+snippet activeform "<?php $form = ActiveForm::begin(); ?>"
+<?php $form = ActiveForm::begin(); ?>
+	$0
+<?php ActiveForm::end(); ?>
+endsnippet
+
+snippet "@action(\w+)" "public function action" r
+public function action`!p snip.rv = match.group(1)`()
+{
+	$1
+}
+endsnippet
+
+snippet "transaction" "transaction" r
+$transaction = Yii::$app->db->beginTransaction();
+
+try {
+	$transaction->commit();
+} catch (Throwable $e) {
+	$transaction->rollBack();
+	throw $e;
+}
 endsnippet

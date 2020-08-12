@@ -6,7 +6,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-let g:UltiSnipsSnippetDirectories=[expand("~/vim/snippets"), "UltiSnips"]
+let g:UltiSnipsSnippetDirectories=[expand("~/dotfiles/config/vim/snippets"), "UltiSnips"]
 
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
