@@ -31,8 +31,6 @@ alias v "vagrant"
 alias vssh "vagrant ssh"
 alias wtmux "tmux has-session -t work >> /dev/null 2>&1 ; and tmux attach-session -t work; or tmux new-session -s work"
 
-alias gulp-coffee="gulp --require coffee-script/register"
-alias btb="lpass show 3113225606 | grep Password: | cut -d ' ' -f 2 | tr -d ' \t\n\r' | xclip"
 alias awesome-restart="echo 'awesome.restart()' | awesome-client"
 
 alias reboot "sudo systemctl reboot"
