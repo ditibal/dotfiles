@@ -9,6 +9,10 @@ set nocompatible             " No to the total compatibility with the ancient vi
 
 " TODO: С+down: 5-down
 " TODO: php fold
+"
+
+let &t_TI = ""
+let &t_TE = ""
 
 call plug#begin('~/.vim/plugged')
 
@@ -89,7 +93,9 @@ Plug 'honza/vim-snippets'
 " Syntax checking hacks for vim
 Plug 'scrooloose/syntastic'
 
-Plug 'shougo/neocomplete.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 " Better whitespace highlighting
 Plug 'ntpeters/vim-better-whitespace'
@@ -122,6 +128,12 @@ Plug 'digitaltoad/vim-pug'
 
 Plug 'AndrewRadev/splitjoin.vim'
 
+Plug 'nicwest/vim-camelsnek'
+
+Plug 'skywind3000/vim-quickui'
+
+Plug 'amoffat/snake'
+
 call plug#end()
 
 source ~/.config/vim/general.vim
@@ -129,7 +141,5 @@ source ~/.config/vim/general.vim
 for f in split(glob('~/.config/vim/plugins/*.vim'), '\n')
     exe 'source' f
 endfor
-
-let g:indentLine_setConceal = 0
 
 autocmd FileType java,php,scss,css,javascript,coffee,python,vim autocmd BufWritePre <buffer> StripWhitespace

@@ -119,6 +119,7 @@ set tabstop=4                  " a tab = four spaces
 set shiftwidth=4               " number of spaces for auto-indent
 set softtabstop=4              " a soft-tab of four spaces
 set autoindent                 " set on the auto-indent
+set smartindent
 set nowrap                     "
 
 " set formatoptions=qrn1ct
@@ -388,7 +389,12 @@ endif
 
 " Make the Y behavior similar to D & C {{{
 
-nnoremap Y y$
+nnoremap d "_d
+vnoremap d "_d
+" nnoremap y "xy
+" vnoremap y "xy
+" nnoremap p "xp
+" vnoremap p "xp
 
 " }}}
 
@@ -425,6 +431,8 @@ map '' ''zz
 " Fast move up/down
 map K 7k
 map J 7j
+map <S-Down> 7j
+map <S-Up> 7k
 
 nnoremap <M-J> :join <CR>
 
@@ -444,3 +452,42 @@ let g:indentLine_char = '┊'
 let g:indentLine_color_gui = '#313334'
 
 autocmd BufEnter * :syntax sync fromstart
+
+function! Expander()
+  let line   = getline(".")
+  let col    = col(".")
+  let first  = line[col-2]
+  let second = line[col-1]
+  let third  = line[col]
+
+  if first ==# ">"
+    if second ==# "<" && third ==# "/"
+      return "\<CR>\<C-o>==\<C-o>O"
+
+    else
+      return "\<CR>"
+
+    endif
+
+  else
+    return "\<CR>"
+
+  endif
+
+endfunction
+
+inoremap <expr> <CR> Expander()
+
+
+" Map Ctrl-Backspace to delete the previous word in insert mode.
+imap <C-BS> <C-W>
+
+" Prevent vim from hiding symbols in markdown and json
+set conceallevel=0
+
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv

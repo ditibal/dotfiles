@@ -1,5 +1,21 @@
 priority -40
 
+snippet r "return" i
+return $1;
+endsnippet
+
+snippet end "Yii::$app->end();" i
+Yii::$app->end();
+endsnippet
+
+snippet rf "return false;" i
+return false;
+endsnippet
+
+snippet rt "return true;" i
+return true;
+endsnippet
+
 snippet am "array_map"
 $${1:items} = array_map(function($${2:i}) {
 	${0}
@@ -131,7 +147,7 @@ public function action`!p snip.rv = match.group(1)`()
 }
 endsnippet
 
-snippet "transaction" "transaction" r
+snippet "trans" "transaction" r
 $transaction = Yii::$app->db->beginTransaction();
 
 try {
