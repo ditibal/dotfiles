@@ -66,6 +66,8 @@
         <exclude name="Squiz.PHP.DisallowComparisonAssignment.AssignedBool" />
         <exclude name="Squiz.Objects.ObjectInstantiation.NotAssigned" />
         <exclude name="Squiz.Arrays.ArrayDeclaration.KeySpecified" />
+        <exclude name="Squiz.Commenting.FunctionComment.WrongStyle" />
+        <exclude name="Squiz.NamingConventions.ValidFunctionName.ScopeNotCamelCaps" />
     </rule>
 
     <rule ref="PEAR">
@@ -79,5 +81,8 @@
         <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments" />
         <exclude name="Zend.Files.ClosingTag.NotAllowed" />
         <exclude name="PEAR.ControlStructures.MultiLineCondition.SpaceBeforeOpenBrace" />
+        <exclude name="PEAR.Commenting.FunctionComment.WrongStyle" />
+        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps" />
     </rule>
 </ruleset>
