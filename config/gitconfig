@@ -1,0 +1,27 @@
+[user]
+	email = ditibal@gmail.com
+	name = ditibal
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    h = log --graph --date=relative --pretty=format:'%C(red)%h%C(yellow)%d%Creset %s %C(green)(%cd) %C(bold blue)<%an>'
+    hh = log --all --graph --date=relative --pretty=format:'%C(red)%h%C(yellow)%d%Creset %s %C(green)(%cd) %C(bold blue)<%an>'
+    type = cat-file -t
+    dump = cat-file -p
+    wdiff = diff --color-words
+    save = !sh ~/bin/git-save
+[push]
+	default = simple
+[core]
+	editor = vim
+[color]
+	ui = true
+[hooks "confirm"]
+	match = TODO
+[init]
+	defaultBranch = master
+[pull]
+	ff = only
