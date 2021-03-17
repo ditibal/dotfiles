@@ -1,8 +1,8 @@
 --[[
-                                
-     Holo Awesome WM config 2.0 
-     github.com/copycat-killer  
-                                
+
+     Holo Awesome WM config 2.0
+     github.com/copycat-killer
+
 --]]
 
 theme                               = {}
@@ -13,8 +13,8 @@ theme.wallpaper                     = os.getenv("HOME") .. "/.config/awesome/the
 
 theme.topbar_path                   = "png:" .. theme.icon_dir .. "/topbar/"
 
-theme.font                          = "Ubuntu 11.5"
-theme.taglist_font                  = "Ubuntu 9"
+theme.font                          = "Noto 12"
+theme.taglist_font                  = "Noto 10"
 theme.fg_normal                     = "#FFFFFF"
 theme.fg_focus                      = "#0099CC"
 theme.bg_normal                     = "#242424"
@@ -31,8 +31,8 @@ theme.tasklist_bg_focus             = "png:" .. theme.icon_dir .. "/bg_focus_nol
 theme.textbox_widget_margin_top     = 1
 theme.awful_widget_height           = 14
 theme.awful_widget_margin_top       = 2
-theme.menu_height                   = "20"
-theme.menu_width                    = "400"
+theme.menu_height                   = "26"
+theme.menu_width                    = "300"
 theme.bg_focus                      = "#303030"
 
 theme.widget_bg                     = theme.icon_dir .. "/bg_focus_noline.png"
