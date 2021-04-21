@@ -129,7 +129,7 @@ keys.globalkeys = awful.util.table.join(
     awful.key({ modkey }, "y",
         function ()
             awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause")
-            awful.spawn("xset dpms force off")
+            awful.spawn("xset dpms force suspend")
             awful.spawn("python2 " .. cfg_dir .."/slimlock.py")
         end),
 
@@ -206,7 +206,7 @@ end
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, keynumber do
-    globalkeys = awful.util.table.join(globalkeys,
+    keys.globalkeys = awful.util.table.join(keys.globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
