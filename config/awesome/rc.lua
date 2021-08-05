@@ -10,9 +10,11 @@ local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
+local LIP = require("libs.LIP")
 
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
+
 
 clients_hidden = true
 
@@ -69,6 +71,7 @@ end
 function trim(s)
     return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
+
 -- }}}
 
 -- {{{ Error handling
@@ -107,6 +110,7 @@ os.setlocale('es_ES.UTF-8')
 -- Directories
 home_dir = os.getenv("HOME")
 cfg_dir = awful.util.getdir("config")
+ini_file = cfg_dir .. "/data.ini"
 theme_dir = cfg_dir .. "/themes"
 
 -- Themes define colours, icons, and wallpapers
@@ -132,6 +136,12 @@ if beautiful.wallpaper then
     end
 end
 -- }}}
+
+local file = io.open(ini_file, 'r')
+if (file == nil) then
+    data = {}
+    LIP.save(ini_file, data);
+end
 
 -- {{{ Layouts
 -- Table of layouts to cover with awful.layout.inc, order matters.

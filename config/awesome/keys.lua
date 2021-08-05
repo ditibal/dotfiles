@@ -1,6 +1,4 @@
 local awful = require("awful")
-local beautiful = require("beautiful")
-local wibox = require("wibox")
 
 local keys = {}
 
@@ -128,9 +126,12 @@ keys.globalkeys = awful.util.table.join(
     -- Lock screen
     awful.key({ modkey }, "y",
         function ()
+            awesome.emit_signal("logout")
             awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause")
             awful.spawn("xset dpms force suspend")
-            awful.spawn("python2 " .. cfg_dir .."/slimlock.py")
+            awful.spawn.easy_async("python2 " .. cfg_dir .."/slimlock.py", function()
+                awesome.emit_signal("login")
+            end)
         end),
 
     awful.key({ modkey }, "r",
@@ -275,7 +276,6 @@ keys.clientbuttons = awful.util.table.join(
         mousegrabber.run(function(mouse) d(mouse.x); if mouse.x == 42 then mousegrabber.stop() end end,"fleur")
 
         awesome.connect_signal('mouse::press', function()
-            d('sd')
             mainmenu:hide()
         end)
     end)

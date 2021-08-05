@@ -1,12 +1,11 @@
 local wibox = require("wibox")
 local awful = require("awful")
-local gears = require("gears")
-local lain = require("lain")
 
 local top_panel = {}
 
 top_panel.create = function(s)
     local taglist = require('widgets.taglist')
+    local expenses = require('widgets.expenses')
 
     local panel = awful.wibar({
         position = "top",
@@ -14,11 +13,16 @@ top_panel.create = function(s)
         height = 24,
     })
 
+    local expensesWidget = expenses.create()
+    local expensesContainer = wibox.container.margin(expensesWidget, 20, 0, 0, 0)
+
     panel:setup {
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,
             taglist.create(s),
+
+            expensesContainer
         },
         nil,
         {
