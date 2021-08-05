@@ -193,7 +193,7 @@ keys.globalkeys = awful.util.table.join(
         end),
 
     awful.key({ modkey }, "t",
-        function (c)
+        function ()
             awful.spawn("telegram-desktop")
         end)
 )
@@ -258,7 +258,7 @@ keys.clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize),
-    awful.button({ modkey, 'Control' }, 3, function (c)
+    awful.button({ modkey, 'Control' }, 3, function ()
         local mmenu = require("modules.menu")
 
         local mainmenu = mmenu({
