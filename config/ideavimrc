@@ -1,0 +1,16 @@
+""" Map leader to space ---------------------
+let mapleader=","
+
+map <A-k> :action NextTab<CR>
+map <A-j> :action PreviousTab<CR>
+
+map <C-w> :action CloseContent<CR>
+
+map <C-PageDown> :action NextTab<CR>
+map <C-PageUp> :action PreviousTab<CR>
+
+map <leader>f <Plug>(easymotion-s)
+map <leader>e <Plug>(easymotion-f)
+
+map <leader>d :action Debug<CR>
+map <leader>r :action RenameElement<CR>
