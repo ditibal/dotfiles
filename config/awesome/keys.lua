@@ -131,6 +131,7 @@ keys.globalkeys = awful.util.table.join(
             awful.spawn("xset dpms force suspend")
             awful.spawn.easy_async("python2 " .. cfg_dir .."/slimlock.py", function()
                 awesome.emit_signal("login")
+                awful.spawn("xset s off -dpms")
             end)
         end),
 
