@@ -9,13 +9,13 @@ local bottom_panel = {}
 
 bottom_panel.create = function(screen)
     local tasklist = awful.widget.tasklist(
-            screen,
-            awful.widget.tasklist.filter.currenttags,
-            awful.util.tasklist_buttons,
-            {
-                bg_focus = theme.bg_focus,
-                align = "center",
-            }
+        screen,
+        awful.widget.tasklist.filter.currenttags,
+        awful.util.tasklist_buttons,
+        {
+            bg_focus = theme.bg_focus,
+            align = "center",
+        }
     )
 
     local clockwidget = wibox.widget.textclock(markup("#FFFFFF", "%H:%M   " .. markup.font("Noto 4", " ")))
@@ -44,9 +44,9 @@ bottom_panel.create = function(screen)
     }
 
     awesome.connect_signal("toggle_panel",
-            function()
-                panel.visible = not panel.visible
-            end
+        function()
+            panel.visible = not panel.visible
+        end
     )
 end
 

@@ -13,5 +13,5 @@ local mainmenu = awful.menu({
 })
 
 awesome.connect_signal('show_mainmenu', function()
-    mainmenu:show({keygrabber=true, coords={x=10, y=10}})
+    mainmenu:show({ keygrabber = true, coords = { x = 10, y = 10 } })
 end)

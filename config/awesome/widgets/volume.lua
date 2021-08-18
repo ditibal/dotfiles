@@ -3,15 +3,15 @@ local wibox = require("wibox")
 local gears = require("gears")
 
 volume = lain.widget.alsabar({
-    notification_preset = { font = "Monospace 9"},
-    ticks  = true,
+    notification_preset = { font = "Monospace 9" },
+    ticks = true,
     width = 80,
     height = 10,
     border_width = 0,
     colors = {
         background = "#383838",
-        unmute     = "#80CCE6",
-        mute       = "#FF9F9F"
+        unmute = "#80CCE6",
+        mute = "#FF9F9F"
     },
 })
 

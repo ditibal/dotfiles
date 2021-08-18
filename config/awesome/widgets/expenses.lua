@@ -58,9 +58,9 @@ Expenses.update = function(force)
     local drebe = data.drebe
 
     if (force ~= true
-            and drebe ~= nil
-            and drebe.updatedAt ~= nil
-            and drebe.updatedAt + 7200 > os.time()
+        and drebe ~= nil
+        and drebe.updatedAt ~= nil
+        and drebe.updatedAt + 7200 > os.time()
     ) then
         Expenses.updateText(drebe.amount or 'Error')
         return

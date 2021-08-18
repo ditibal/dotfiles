@@ -8,7 +8,7 @@ local cpu = lain.widget.cpu({
     settings = function()
         widget:set_markup(
             markup.font(theme.font, "CPU " .. cpu_now.usage .. "% ") ..
-            markup.font("Roboto 5", " ")
+                markup.font("Roboto 5", " ")
         )
     end
 })

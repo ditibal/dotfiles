@@ -15,7 +15,6 @@ local LIP = require("libs.LIP")
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
 
-
 clients_hidden = true
 
 awful.client.property.persist("hideable", "boolean")
@@ -45,14 +44,16 @@ function update_hidden_clients()
             if not clients_hidden then
                 c.hidden = false
                 c.focusable = true
-                c:emit_signal("request::activate", "client.focus.byidx", {raise=true})
+                c:emit_signal("request::activate", "client.focus.byidx", { raise = true })
                 c.focusable = false
 
                 if c.id == 'shop' then
                     c.opacity = 0.5
                 end
 
-                if client.focus then client.focus:raise() end
+                if client.focus then
+                    client.focus:raise()
+                end
             else
                 c.hidden = true
             end
@@ -61,7 +62,9 @@ function update_hidden_clients()
 end
 
 -- Functions
-function d(var, depth) gears.debug.dump(var, 'dump', depth) end
+function d(var, depth)
+    gears.debug.dump(var, 'dump', depth)
+end
 
 function amixer_set(step)
     awful.spawn(string.format("amixer sset %s %s &> /dev/null", 'Master', step))
@@ -78,17 +81,19 @@ end
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
     awful.util.spawn_with_shell("notify-send -u 'critical' " ..
-                                "'Oops, there were errors during startup!'" ..
-                                awesome.startup_errors
-                               )
+            "'Oops, there were errors during startup!'" ..
+            awesome.startup_errors
+    )
 end
 
 -- Handle runtime errors after startup
 do
     local in_error = false
-    awesome.connect_signal("debug::error", function (err)
+    awesome.connect_signal("debug::error", function(err)
         -- Make sure we don't go into an endless error loop
-        if in_error then return end
+        if in_error then
+            return
+        end
         in_error = true
 
         naughty.notify({ preset = naughty.config.presets.critical,
@@ -139,8 +144,7 @@ end
 
 -- Layouts
 -- Table of layouts to cover with awful.layout.inc, order matters.
-layouts =
-{
+layouts = {
     awful.layout.suit.max,
     awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
@@ -148,13 +152,12 @@ layouts =
 
 -- Tags
 tags = {
-   names = { " 1 ", " 2 ", " 3 " },
-   layout = { layouts[1], layouts[1], layouts[1] }
+    names = { " 1 ", " 2 ", " 3 " },
+    layout = { layouts[1], layouts[1], layouts[1] }
 }
 for s = 1, screen.count() do
-   tags[s] = awful.tag(tags.names, s, tags.layout)
+    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
-
 
 require('components.mainmenu')
 
@@ -179,12 +182,12 @@ awful.rules.rules = create_rules(keys.clientkeys, keys.clientbuttons)
 
 -- Signals
 -- Signal function to execute when a new client appears.
-client.connect_signal("manage", function (c, startup)
+client.connect_signal("manage", function(c, startup)
     if not startup then
         -- Put windows in a smart way, only if they does not set an initial
         -- position.
         if not c.size_hints.user_position and
-            not c.size_hints.program_position then
+                not c.size_hints.program_position then
             awful.placement.no_overlap(c)
             awful.placement.no_offscreen(c)
         end
