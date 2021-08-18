@@ -1,15 +1,18 @@
 local wibox = require("wibox")
-local lain = require("lain")
-local gears = require("gears")
 local awful = require("awful")
 
 local taglist = {}
 
-taglist.create = function(s)
-    local taglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons, { bg_focus = barcolor })
-    local taglistcont = wibox.container.background(taglist, theme.bg_focus, gears.shape.rectangle)
-    local taglist = wibox.container.margin(taglistcont, 0, 0, 5, 5)
-    return taglist
+taglist.create = function(screen)
+    local taglistwidget = awful.widget.taglist {
+        screen = screen,
+        filter = awful.widget.taglist.filter.all,
+        style = {
+            bg_focus = theme.bg_focus,
+        }
+    }
+
+    return wibox.container.margin(taglistwidget)
 end
 
 return taglist

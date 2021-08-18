@@ -60,7 +60,7 @@ function update_hidden_clients()
     end
 end
 
--- {{{ Functions
+-- Functions
 function d(var, depth) gears.debug.dump(var, 'dump', depth) end
 
 function amixer_set(step)
@@ -72,9 +72,8 @@ function trim(s)
     return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
--- }}}
 
--- {{{ Error handling
+-- Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -98,15 +97,12 @@ do
         in_error = false
     end)
 end
--- }}}
 
--- {{{ Some initializations
+-- Some initializations
 -- set the local settings
 os.setlocale('es_ES.UTF-8')
--- }}}
 
--- {{{ Variable definitions
-
+-- Variable definitions
 -- Directories
 home_dir = os.getenv("HOME")
 cfg_dir = awful.util.getdir("config")
@@ -127,15 +123,13 @@ modkey = "Mod4"
 naughty.config.presets.normal.icon_size = 50
 naughty.config.presets.low.icon_size = 50
 naughty.config.presets.critical.icon_size = 50
--- }}}
 
--- {{{ Wallpaper
+-- Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
 end
--- }}}
 
 local file = io.open(ini_file, 'r')
 if (file == nil) then
@@ -143,7 +137,7 @@ if (file == nil) then
     LIP.save(ini_file, data);
 end
 
--- {{{ Layouts
+-- Layouts
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
@@ -151,9 +145,8 @@ layouts =
     awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
 }
--- }}}
 
--- {{{ Tags
+-- Tags
 tags = {
    names = { " 1 ", " 2 ", " 3 " },
    layout = { layouts[1], layouts[1], layouts[1] }
@@ -161,7 +154,6 @@ tags = {
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
--- }}}
 
 
 require('components.mainmenu')
@@ -185,7 +177,7 @@ local create_rules = require("rules").create
 awful.rules.rules = create_rules(keys.clientkeys, keys.clientbuttons)
 
 
--- {{{ Signals
+-- Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
     if not startup then
@@ -202,9 +194,3 @@ client.connect_signal("manage", function (c, startup)
         end
     end
 end)
--- }}}
-
--- {{{ Folding for Vim
--- This fold the sections in vim, for a better handling
--- vim:foldmethod=marker
--- }}}

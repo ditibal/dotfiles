@@ -7,15 +7,15 @@ local markup = lain.util.markup
 
 local bottom_panel = {}
 
-bottom_panel.create = function(s)
-    local mytasklist = awful.widget.tasklist(
-        s,
-        awful.widget.tasklist.filter.currenttags,
-        awful.util.tasklist_buttons,
-        {
-            bg_focus = theme.bg_focus,
-            align = "center",
-        }
+bottom_panel.create = function(screen)
+    local tasklist = awful.widget.tasklist(
+            screen,
+            awful.widget.tasklist.filter.currenttags,
+            awful.util.tasklist_buttons,
+            {
+                bg_focus = theme.bg_focus,
+                align = "center",
+            }
     )
 
     local clockwidget = wibox.widget.textclock(markup("#FFFFFF", "%H:%M   " .. markup.font("Noto 4", " ")))
@@ -23,7 +23,7 @@ bottom_panel.create = function(s)
 
     local panel = awful.wibar({
         position = "bottom",
-        screen = s,
+        screen = screen,
         border_width = 5,
         border_color = beautiful.border_normal,
         height = 24,
@@ -33,7 +33,7 @@ bottom_panel.create = function(s)
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,
-            mytasklist
+            tasklist
         },
         nil,
         {
@@ -44,11 +44,10 @@ bottom_panel.create = function(s)
     }
 
     awesome.connect_signal("toggle_panel",
-        function()
-            panel.visible = not panel.visible
-        end
+            function()
+                panel.visible = not panel.visible
+            end
     )
 end
 
 return bottom_panel
-

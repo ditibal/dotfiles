@@ -1,9 +1,7 @@
 local wibox = require("wibox")
 local lain = require("lain")
-local gears = require("gears")
 
 local markup = lain.util.markup
-
 local icon = wibox.widget.imagebox(theme.cpu)
 
 local cpu = lain.widget.cpu({
@@ -14,8 +12,7 @@ local cpu = lain.widget.cpu({
         )
     end
 })
-local cpubg = wibox.container.background(cpu.widget, theme.bg_focus, gears.shape.rectangle)
-local cpuwidget = wibox.container.margin(cpubg)
+local cpuwidget = wibox.container.margin(cpu.widget)
 cpuwidget.forced_width = 90
 
 local widget = wibox.widget {
@@ -24,4 +21,4 @@ local widget = wibox.widget {
     layout = wibox.layout.fixed.horizontal,
 }
 
-return widget
+return wibox.container.margin(widget, 10)
