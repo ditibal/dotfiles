@@ -7,16 +7,32 @@ local markup = lain.util.markup
 
 local bottom_panel = {}
 
+local tasklist_buttons = awful.util.table.join(
+        awful.button({ }, 1, function(c)
+            if not c.minimized then
+                c:emit_signal(
+                        "request::activate",
+                        "tasklist",
+                        { raise = true }
+                )
+            end
+        end),
+        awful.button({ }, 3, function(c)
+            c.minimized = not c.minimized
+        end)
+)
+
 bottom_panel.create = function(screen)
-    local tasklist = awful.widget.tasklist(
-        screen,
-        awful.widget.tasklist.filter.currenttags,
-        awful.util.tasklist_buttons,
-        {
+    local tasklist = awful.widget.tasklist({
+        screen = screen,
+        filter = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons,
+        style = {
             bg_focus = theme.bg_focus,
+            fg_minimize = '#4E4E4E',
             align = "center",
         }
-    )
+    })
 
     local clockwidget = wibox.widget.textclock(markup("#FFFFFF", "%H:%M   " .. markup.font("Noto 4", " ")))
     clockwidget.forced_width = 65
@@ -44,9 +60,9 @@ bottom_panel.create = function(screen)
     }
 
     awesome.connect_signal("toggle_panel",
-        function()
-            panel.visible = not panel.visible
-        end
+            function()
+                panel.visible = not panel.visible
+            end
     )
 end
 
