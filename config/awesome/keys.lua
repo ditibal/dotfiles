@@ -116,14 +116,8 @@ keys.globalkeys = awful.util.table.join(
 -- Capture screen to buffer
     awful.key({ }, "Print",
         function()
-            awful.spawn("/usr/bin/bash -c \" sleep 0.2 && scrot -sf /tmp/scrot-screenshot.png -e 'xclip -selection c -t image/png < $f' && rm /tmp/scrot-screenshot.png  \"")
+            awful.spawn("/usr/bin/bash -c \" sleep 0.2 && scrot -f -s /tmp/scrot-screenshot.png -e 'xclip -selection c -t image/png < $f' && rm /tmp/scrot-screenshot.png  \"")
         end),
-
--- -- copy music to ~/_phone
--- awful.key({ modkey }, "Delete",
---     function ()
---         awful.spawn("python /home/ditibal/cp-music.py")
---     end),
 
 -- Lock screen
     awful.key({ modkey }, "y",
