@@ -152,7 +152,7 @@ layouts = {
 
 -- Tags
 tags = {
-    names = { " 1 ", " 2 ", " 3 " },
+    names = { " 1 ", " 2 ", " 3 ", " work ", " shop " },
     layout = { layouts[1], layouts[1], layouts[1] }
 }
 for s = 1, screen.count() do
