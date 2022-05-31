@@ -2,7 +2,8 @@ local awful = require("awful")
 
 local awesomemenu = {
     { "manual", terminal .. " -e man awesome" },
-    { "restart", awesome.restart }
+    { "restart", awesome.restart },
+    { "quit", function() awesome.quit() end }
 }
 
 local mainmenu = awful.menu({
