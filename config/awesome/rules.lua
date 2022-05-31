@@ -31,8 +31,8 @@ function rules.create(clientkeys, clientbuttons)
             properties = {
                 floating = true,
                 ontop = true,
-                height = 750,
-                width = 600,
+                height = 1200,
+                width = 900,
             },
             callback = function(c)
                 local c_geometry = c:geometry()
