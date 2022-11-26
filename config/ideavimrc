@@ -1,16 +1,64 @@
-""" Map leader to space ---------------------
 let mapleader=","
 
-map <A-k> :action NextTab<CR>
-map <A-j> :action PreviousTab<CR>
+""" Plugins  --------------------------------
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
 
-map <C-w> :action CloseContent<CR>
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+""" Common settings -------------------------
+set showmode
+set so=5
+set incsearch
+set nu
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+set scrolloff=7
+set ignorecase
+
+map gt :action VimGotoDeclaration<CR>
+
+" Keep selection when indenting/outdenting.
+vnoremap > >gv
+vnoremap < <gv
+
+" Fast move up/down
+map K 7k
+map J 7j
+
+map <leader>u :action LocalHistory.ShowHistory<CR>
+nmap se <Action>(ShowErrorDescription)
+
+" nmap <A-k> <Action>(NextTab)
+" nmap <A-j> <Action>(PreviousTab)
 
 map <C-PageDown> :action NextTab<CR>
 map <C-PageUp> :action PreviousTab<CR>
 
 map <leader>f <Plug>(easymotion-s)
-map <leader>e <Plug>(easymotion-f)
 
 map <leader>d :action Debug<CR>
 map <leader>r :action RenameElement<CR>
+
+map <leader>w :action CloseContent<CR>
+map gw :action ReopenClosedTab<CR>
+
+
+map <leader>v :action SplitVertically<CR>
+
+
+map <C-w>l :action NextSplitter<CR>
+map <C-w>h :action PrevSplitter<CR>
+
+map mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
+vmap mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
