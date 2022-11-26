@@ -56,6 +56,7 @@ Expenses.update = function(force)
 
     local data = LIP.load(ini_file);
     local drebe = data.drebe
+    local cookie = drebe.cookie
 
     if (force ~= true
         and drebe ~= nil
@@ -66,7 +67,7 @@ Expenses.update = function(force)
         return
     end
 
-    local command = '/usr/bin/python ' .. cfg_dir .. 'drebe.py'
+    local command = '/usr/bin/python ' .. cfg_dir .. 'drebe.py --cookie="' .. drebe.cookie .. '"'
 
     awful.spawn.easy_async(command, function(amount)
         amount = amount or 'Error'
@@ -75,7 +76,8 @@ Expenses.update = function(force)
 
         data.drebe = {
             amount = amount,
-            updatedAt = updatedAt
+            updatedAt = updatedAt,
+            cookie = cookie
         }
 
         Expenses.updatedAt = updatedAt
