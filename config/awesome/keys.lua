@@ -1,17 +1,52 @@
 local awful = require("awful")
+local table = table
+local gmath = require("gears.math")
 
 local keys = {}
 
-keys.globalkeys = awful.util.table.join(
-    awful.key({ modkey }, "h",
-        function()
-            awful.tag.viewprev()
-        end),
+function viewidx(i)
+    local screen = awful.screen.focused()
+    local tags = screen.tags
+    local showntags = {}
+    local sel = screen.selected_tag
 
-    awful.key({ modkey }, "l",
-        function()
-            awful.tag.viewnext()
-        end),
+    for _, t in ipairs(tags) do
+        if not t.hide and not t.hidden then
+            table.insert(showntags, t)
+        else
+            if t == sel then
+                table.insert(showntags, t)
+            end
+        end
+    end
+
+    awful.tag.viewnone(screen)
+    for k, t in ipairs(showntags) do
+        if t == sel then
+            showntags[gmath.cycle(#showntags, k + i)].selected = true
+        end
+    end
+    screen:emit_signal("tag::history::update")
+end
+
+function viewnext()
+    viewidx(1)
+end
+
+function viewprev()
+    viewidx(-1)
+end
+
+keys.globalkeys = awful.util.table.join(
+        awful.key({ modkey }, "h",
+                function()
+                    viewprev()
+                end),
+
+        awful.key({ modkey }, "l",
+                function()
+                    viewnext()
+                end),
 
     awful.key({ modkey }, "k",
         function()
@@ -23,15 +58,15 @@ keys.globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
         end),
 
-    awful.key({ modkey }, "Left",
-        function()
-            awful.tag.viewprev()
-        end),
+        awful.key({ modkey }, "Left",
+                function()
+                    viewprev()
+                end),
 
-    awful.key({ modkey }, "Right",
-        function()
-            awful.tag.viewnext()
-        end),
+        awful.key({ modkey }, "Right",
+                function()
+                    viewnext()
+                end),
 
     awful.key({ modkey }, "Down",
         function()
