@@ -1,4 +1,5 @@
 local beautiful = require("beautiful")
+local awful = require("awful")
 
 local rules = {}
 
@@ -18,14 +19,36 @@ function rules.create(clientkeys, clientbuttons)
                 size_hints_honor = false
             }
         },
-
         {
-            rule = { class = "Gvim" },
+            rule = {
+                class = "zoom",
+                name = "zoom",
+                instance = "zoom",
+                type = "normal"
+            },
             properties = {
-                size_hints_honor = false
-            }
-        },
+                floating = true
+            },
+            callback = function(c)
+                local c_geometry = c:geometry()
+                local s_geometry = screen[c.screen].geometry
 
+                c:geometry({
+                    x = s_geometry.x + (s_geometry.width - c_geometry.width),
+                    y = s_geometry.y + (s_geometry.height - c_geometry.height) - 33
+                })
+
+                client.connect_signal("property::x", function(client)
+                    local cc_geometry = client:geometry()
+                    local ss_geometry = screen[client.screen].geometry
+
+                    client:geometry({
+                        x = ss_geometry.x + (ss_geometry.width - cc_geometry.width),
+                        y = ss_geometry.y + (ss_geometry.height - cc_geometry.height) - 33
+                    })
+                end)
+            end
+        },
         {
             rule = { class = "TelegramDesktop" },
             properties = {
