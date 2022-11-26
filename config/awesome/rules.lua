@@ -67,7 +67,11 @@ function rules.create(clientkeys, clientbuttons)
                                     y = s_geometry.y + (s_geometry.height - c_geometry.height) - 33 })
             end
         },
-   }
+        {
+            rule = { class = "chromium" },
+            properties = { maximized = false }
+        },
+    }
 end
 
 -- return module table
