@@ -17,6 +17,7 @@
 	default = simple
 [core]
 	editor = vim
+	autocrlf = input
 [color]
 	ui = true
 [hooks "confirm"]
