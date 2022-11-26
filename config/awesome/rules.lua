@@ -4,7 +4,7 @@ local awful = require("awful")
 local rules = {}
 
 function rules.create(clientkeys, clientbuttons)
-   return {
+    return {
         -- All clients will match this rule.
         -- xprop |awk '/WM_CLASS/{print $4}'
         {
@@ -63,8 +63,10 @@ function rules.create(clientkeys, clientbuttons)
                 local c_geometry = c:geometry()
                 local s_geometry = screen[c.screen].geometry
 
-                c:geometry({ x = s_geometry.x + (s_geometry.width - c_geometry.width),
-                                    y = s_geometry.y + (s_geometry.height - c_geometry.height) - 33 })
+                c:geometry({
+                    x = s_geometry.x + (s_geometry.width - c_geometry.width),
+                    y = s_geometry.y + (s_geometry.height - c_geometry.height) - 33
+                })
             end
         },
         {
