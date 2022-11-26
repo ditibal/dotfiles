@@ -56,7 +56,9 @@ function rules.create(clientkeys, clientbuttons)
                 ontop = true,
                 height = 1200,
                 width = 900,
+                sticky = true,
             },
+            tags = awful.screen.tags,
             callback = function(c)
                 local c_geometry = c:geometry()
                 local s_geometry = screen[c.screen].geometry
