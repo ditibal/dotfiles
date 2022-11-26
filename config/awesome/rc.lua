@@ -15,6 +15,18 @@ local LIP = require("libs.LIP")
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
 
+local original_taglist_label = awful.widget.taglist.taglist_label
+function awful.widget.taglist.taglist_label(tag, args)
+    local text, bg, bg_image, icon, other_args = original_taglist_label(tag, args)
+
+    if tag.hidden then
+        text = '<span color="#4E4E4E"> ' .. text .. '</span>'
+    end
+
+    return text, bg, bg_image, icon, other_args
+end
+
+
 clients_hidden = true
 
 awful.client.property.persist("hideable", "boolean")
