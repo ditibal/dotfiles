@@ -136,6 +136,12 @@ keys.globalkeys = awful.util.table.join(
             volume.update()
         end),
 
+        --awful.key({ modkey }, "w",
+        --        function()
+        --            awful.spawn.with_shell("sleep 0.2; xdotool mousedown 1")
+        --            -- awesome.emit_signal("show_mainmenu")
+        --        end),
+
 -- Standard program
     awful.key({ modkey }, "Return", function()
         awful.spawn(terminal)
