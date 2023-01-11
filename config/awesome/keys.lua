@@ -48,15 +48,15 @@ keys.globalkeys = awful.util.table.join(
                     viewnext()
                 end),
 
-    awful.key({ modkey }, "k",
-        function()
-            awful.client.focus.byidx(1)
-        end),
+        awful.key({ modkey }, "k",
+                function()
+                    awful.client.focus.byidx(1)
+                end),
 
-    awful.key({ modkey }, "j",
-        function()
-            awful.client.focus.byidx(-1)
-        end),
+        awful.key({ modkey }, "j",
+                function()
+                    awful.client.focus.byidx(-1)
+                end),
 
         awful.key({ modkey }, "Left",
                 function()
@@ -68,73 +68,68 @@ keys.globalkeys = awful.util.table.join(
                     viewnext()
                 end),
 
-    awful.key({ modkey }, "Down",
-        function()
-            awful.client.focus.byidx(1)
-        end),
+        awful.key({ modkey }, "Tab",
+                function()
+                    awful.tag.history.restore()
+                end),
 
-    awful.key({ modkey }, "Up",
-        function()
-            awful.client.focus.byidx(-1)
-        end),
+        awful.key({ modkey }, "Down",
+                function()
+                    awful.client.focus.byidx(1)
+                end),
 
-    awful.key({ modkey }, "Page_Up",
-        function()
-            awful.client.focus.byidx(-1)
-        end),
+        awful.key({ modkey }, "Up",
+                function()
+                    awful.client.focus.byidx(-1)
+                end),
 
-    awful.key({ modkey }, "Page_Down",
-        function()
-            awful.client.focus.byidx(1)
-        end),
+        awful.key({ modkey }, "w",
+                function()
+                    awesome.emit_signal("show_mainmenu")
+                end),
 
-    awful.key({ modkey }, "w",
-        function()
-            awesome.emit_signal("show_mainmenu")
-        end),
+        -- hide / show Wibox
+        awful.key({ modkey }, "b",
+            function()
+                awesome.emit_signal("toggle_panel")
+            end),
 
--- hide / show Wibox
-    awful.key({ modkey }, "b",
-        function()
-            awesome.emit_signal("toggle_panel")
-        end),
+        -- dmenu
+        awful.key({ modkey }, "/",
+            function()
+                awful.spawn(
+                    "/usr/bin/bash -c \"export LANGUAGE=en_US.UTF8; export PATH=$PATH:~/bin;" ..
+                        "dmenu_run -b -i -fn " ..
+                        "'-*-dejavu sans mono-*-r-*-*-16-*-*-*-*-*-*-*' -p 'run:'\"")
+            end),
 
--- dmenu
-    awful.key({ modkey }, "/",
-        function()
-            awful.spawn(
-                "/usr/bin/bash -c \"export LANGUAGE=en_US.UTF8; export PATH=$PATH:~/bin;" ..
-                    "dmenu_run -b -i -fn " ..
-                    "'-*-dejavu sans mono-*-r-*-*-16-*-*-*-*-*-*-*' -p 'run:'\"")
-        end),
+        -- ALSA volume control
+        awful.key({ modkey }, ".",
+                function()
+                    amixer_set('5%+')
+                end),
 
--- ALSA volume control
-    awful.key({ modkey }, ".",
-        function()
-            amixer_set('5%+')
-        end),
+        awful.key({ modkey }, ",",
+                function()
+                    amixer_set('5%-')
+                end),
 
-    awful.key({ modkey }, ",",
-        function()
-            amixer_set('5%-')
-        end),
+        awful.key({ modkey, 'Mod1' }, ".",
+                function()
+                    amixer_set('10%+')
+                end),
 
-    awful.key({ modkey, 'Mod1' }, ".",
-        function()
-            amixer_set('10%+')
-        end),
+        awful.key({ modkey, 'Mod1' }, ",",
+                function()
+                    amixer_set('10%-')
+                end),
 
-    awful.key({ modkey, 'Mod1' }, ",",
-        function()
-            amixer_set('10%-')
-        end),
-
-    awful.key({ modkey }, "m",
-        function()
-            -- TODO
-            awful.spawn(string.format("amixer set %s toggle", 'Master'))
-            volume.update()
-        end),
+        awful.key({ modkey }, "m",
+                function()
+                    -- TODO
+                    awful.spawn(string.format("amixer set %s toggle", 'Master'))
+                    volume.update()
+                end),
 
         --awful.key({ modkey }, "w",
         --        function()
@@ -142,98 +137,98 @@ keys.globalkeys = awful.util.table.join(
         --            -- awesome.emit_signal("show_mainmenu")
         --        end),
 
--- Standard program
-    awful.key({ modkey }, "Return", function()
-        awful.spawn(terminal)
-    end),
-
-    awful.key({ modkey }, "space",
-        function()
-            awful.layout.inc(layouts, 1)
+        -- Standard program
+        awful.key({ modkey }, "Return", function()
+            awful.spawn(terminal)
         end),
 
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
+        awful.key({ modkey }, "space",
+                function()
+                    awful.layout.inc(layouts, 1)
+                end),
 
--- Capture screen to buffer
-    awful.key({ }, "Print",
-        function()
-            awful.spawn("/usr/bin/bash -c \" sleep 0.2 && scrot -f -s /tmp/scrot-screenshot.png -e 'xclip -selection c -t image/png < $f' && rm /tmp/scrot-screenshot.png  \"")
-        end),
+        awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
--- Lock screen
-    awful.key({ modkey }, "y",
-        function()
-            awesome.emit_signal("logout")
-            awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause")
-            awful.spawn("xset dpms force suspend")
-            awful.spawn.easy_async("python2 " .. cfg_dir .. "/slimlock.py", function()
-                awesome.emit_signal("login")
-                awful.spawn("xset s off -dpms")
-            end)
-        end),
+        -- Capture screen to buffer
+        awful.key({ }, "Print",
+                function()
+                    awful.spawn("/usr/bin/bash -c \" sleep 0.2 && scrot -f -s /tmp/scrot-screenshot.png -e 'xclip -selection c -t image/png < $f' && rm /tmp/scrot-screenshot.png  \"")
+                end),
 
-    awful.key({ modkey }, "r",
-        function()
-            for _, c in ipairs(client.get()) do
-                if c.id == 'ranger' then
-                    c:move_to_tag(client.focus.first_tag)
-                    client.focus = c
-                    c:raise()
-                    return
-                end
-            end
+        -- Lock screen
+        awful.key({ modkey }, "y",
+                function()
+                    awesome.emit_signal("logout")
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause")
+                    awful.spawn("xset dpms force suspend")
+                    awful.spawn.easy_async("python2 " .. cfg_dir .. "/slimlock.py", function()
+                        awesome.emit_signal("login")
+                        awful.spawn("xset s off -dpms")
+                    end)
+                end),
 
-            awful.spawn.raise_or_spawn('xterm -e /bin/fish -c "ranger"', {}, function(c)
-                c.id = 'ranger'
+        awful.key({ modkey }, "r",
+                function()
+                    for _, c in ipairs(client.get()) do
+                        if c.id == 'ranger' then
+                            c:move_to_tag(client.focus.first_tag)
+                            client.focus = c
+                            c:raise()
+                            return
+                        end
+                    end
 
-                client.focus = c
-                c:raise()
-            end)
-        end),
+                    awful.spawn.raise_or_spawn('xterm -e /bin/fish -c "ranger"', {}, function(c)
+                        c.id = 'ranger'
 
-    awful.key({ modkey }, "u",
-        function()
-            awesome.emit_signal("show_projectmenu")
-        end),
+                        client.focus = c
+                        c:raise()
+                    end)
+                end),
 
-    awful.key({ modkey }, "s",
-        function()
-            awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
-        end),
+        awful.key({ modkey }, "u",
+                function()
+                    awesome.emit_signal("show_projectmenu")
+                end),
 
-    awful.key({ modkey }, "a",
-        function()
-            awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
-        end),
+        awful.key({ modkey }, "s",
+                function()
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
+                end),
 
-    awful.key({ modkey }, "d",
-        function()
-            awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
-        end),
+        awful.key({ modkey }, "a",
+                function()
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
+                end),
 
-    awful.key({ modkey }, "F12", function()
-        clients_hidden = true
-        update_hidden_clients()
+        awful.key({ modkey }, "d",
+                function()
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
+                end),
 
-        awesome.restart()
-    end),
-
-    awful.key({ modkey }, "F1",
-        function()
-            clients_hidden = false
-            update_hidden_clients()
-        end),
-
-    awful.key({}, "F1",
-        function()
+        awful.key({ modkey }, "F12", function()
             clients_hidden = true
             update_hidden_clients()
+
+            awesome.restart()
         end),
 
-    awful.key({ modkey }, "t",
-        function()
-            awful.spawn("telegram-desktop")
-        end)
+        awful.key({ modkey }, "F1",
+                function()
+                    clients_hidden = false
+                    update_hidden_clients()
+                end),
+
+        awful.key({}, "F1",
+                function()
+                    clients_hidden = true
+                    update_hidden_clients()
+                end),
+
+        awful.key({ modkey }, "t",
+                function()
+                    awful.spawn("telegram-desktop")
+                end)
 )
 
 keynumber = 0
