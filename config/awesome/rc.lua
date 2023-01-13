@@ -209,3 +209,10 @@ client.connect_signal("manage", function(c, startup)
         end
     end
 end)
+
+awesome.connect_signal(
+        'startup',
+        function()
+            awful.util.spawn('bash -c "~/bin/startup.sh"')
+        end
+)
