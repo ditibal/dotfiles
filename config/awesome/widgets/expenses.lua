@@ -3,7 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 local LIP = require("libs.LIP")
 
-Expenses = {}
+local Expenses = {}
 
 Expenses.create = function()
     Expenses.textWidget = wibox.widget.textbox('0 000.00 Р')

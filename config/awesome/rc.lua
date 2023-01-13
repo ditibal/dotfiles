@@ -11,6 +11,7 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local LIP = require("libs.LIP")
+local Storage = require("libs.storage")
 
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
@@ -78,6 +79,11 @@ function d(var, depth)
     gears.debug.dump(var, 'dump', depth)
 end
 
+function n(var)
+    naughty.notify({ text = var })
+end
+
+
 function amixer_set(step)
     awful.spawn(string.format("amixer sset %s %s &> /dev/null", 'Master', step))
     volume.update()
@@ -129,6 +135,8 @@ theme_dir = cfg_dir .. "/themes"
 -- Themes define colours, icons, and wallpapers
 beautiful.init(theme_dir .. "/holo/theme.lua")
 
+storage = Storage(cfg_dir .. "storage_data.lua")
+
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
 editor = os.getenv("EDITOR") or "vim"
@@ -164,11 +172,29 @@ layouts = {
 
 -- Tags
 tags = {
-    names = { " general ", " general 2 ", " slack ", " autoshina ", "t", " webpack ", " work ", "t", " shop ", "t" },
-    layout = { layouts[1], layouts[1], layouts[1] }
+    " general ",
+    " general 2 ",
+    " slack ",
+    " autoshina ",
+    "t",
+    " webpack ",
+    " work ",
+    "t",
+    " shop ",
+    "t"
 }
-for s = 1, screen.count() do
-    tags[s] = awful.tag(tags.names, s, tags.layout)
+
+local tags_visible = storage:get('tags_visible', {})
+
+for screen_id = 1, screen.count() do
+    for key, tag_name in ipairs(tags) do
+        awful.tag.add(tag_name, {
+            screen = screen_id,
+            layout = layouts[1],
+            hidden = tags_visible[tag_name:gsub("%s+", "_")] or false,
+            selected = key == 1 and true or false
+        })
+    end
 end
 
 require('components.mainmenu')

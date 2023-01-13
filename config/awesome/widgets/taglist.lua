@@ -4,17 +4,22 @@ local awful = require("awful")
 local taglist = {}
 
 local taglist_buttons = awful.util.table.join(
-        awful.button({ }, 1, function(t)
-            t:view_only()
+        awful.button({ }, 1, function(tag)
+            tag:view_only()
         end),
-        awful.button({ modkey }, 1, function(t)
+
+        awful.button({ modkey }, 1, function(tag)
             if client.focus then
-                client.focus:move_to_tag(t)
+                client.focus:move_to_tag(tag)
             end
         end),
-        awful.button({ }, 3, function(t)
-            t.hidden = not t.hidden
-            t:emit_signal("property::name")
+
+        awful.button({ }, 3, function(tag)
+            local tags_visible = storage:get('tags_visible', {})
+            tag.hidden = not tag.hidden
+            tags_visible[tag.name:gsub("%s+", "_")] = tag.hidden
+            storage:set('tags_visible', tags_visible)
+            tag:emit_signal("property::name")
         end)
 )
 
