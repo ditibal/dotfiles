@@ -2,11 +2,23 @@ local wibox = require("wibox")
 local gears = require("gears")
 local awful = require("awful")
 local LIP = require("libs.LIP")
+local json = require("libs.json")
+
+local text_from_result = function(result)
+    local reports = json.decode(result)
+    local text = reports.last_thirty_days .. ' / ' .. reports.month
+
+    if reports.overspending then
+        text = text .. ' / ' .. '<b><span foreground="red">' .. reports.overspending .. '</span></b>'
+    end
+    return text
+end
+
 
 local Expenses = {}
 
 Expenses.create = function()
-    Expenses.textWidget = wibox.widget.textbox('0 000.00 Р')
+    Expenses.textWidget = wibox.widget.textbox('-')
 
     awful.tooltip {
         objects = { Expenses.textWidget },
@@ -31,14 +43,7 @@ Expenses.create = function()
     }
 
     Expenses.update()
-
-    local updatedAt = storage:get('drebe_updated_at')
-    local amount = storage:get('drebe_amount')
-
-    if (updatedAt ~= nil) then
-        Expenses.updatedAt = updatedAt
-        Expenses.amount = amount
-    end
+    Expenses.updatedAt = storage:get('drebe_updated_at')
 
     return Expenses.textWidget
 end
@@ -56,37 +61,35 @@ Expenses.update = function(force)
 
     local data = LIP.load(ini_file);
     local drebe = data.drebe
+
     local updatedAt = storage:get('drebe_updated_at')
-    local amount = storage:get('drebe_amount')
+    local result = storage:get('drebe_result')
 
     if (force ~= true
         and updatedAt ~= nil
         and updatedAt + 7200 > os.time()
     ) then
-        Expenses.updateText(amount or 'Error')
+        Expenses.updateText(text_from_result(result))
         return
     end
 
     local command = '/usr/bin/python ' .. cfg_dir .. 'drebe.py --cookie="' .. drebe.cookie .. '"'
 
-    awful.spawn.easy_async(command, function(amount)
-        amount = amount or 'Error'
-        amount = string.gsub(amount, '^%s*(.-)%s*$', '%1')
-        Expenses.updateText(amount)
+    awful.spawn.easy_async(command, function(r)
+        r = string.gsub(r, '^%s*(.-)%s*$', '%1')
+
+        Expenses.updateText(text_from_result(r))
         updatedAt = os.time()
 
-        storage:set('drebe_amount', amount)
+        storage:set('drebe_result', r)
         storage:set('drebe_updated_at', updatedAt)
 
         Expenses.updatedAt = updatedAt
-        Expenses.amount = amount
-
-        print(os.date("[%d/%b/%Y %H:%M:%S] Update drebe"))
     end)
 end
 
 Expenses.updateText = function(text)
-    Expenses.textWidget:set_markup_silently('<b>' .. text .. '</b>')
+    Expenses.textWidget:set_markup_silently(text)
 end
 
 return Expenses

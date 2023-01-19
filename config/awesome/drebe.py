@@ -1,7 +1,16 @@
+import json
 import re
-import time
 import requests
 import argparse
+
+
+def human_format(num, round_to=2):
+    magnitude = 0
+    while abs(num) >= 1000:
+        magnitude += 1
+        num = round(num / 1000.0, round_to)
+    return '{:.{}f}{}'.format(num, round_to, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cookie')
@@ -73,20 +82,23 @@ def get_report(period, only_fun=False):
 
     pattern = r'<div.*><span.*>Итого<\/span>.*<div\s+class=\"sum\"><div\s+class=\"s\">(.*?)<span.*?>(.*?)</span><\/div>'
     result = re.search(pattern, out, re.UNICODE)
-    amount = '0'
+    amount = 0
 
     if result:
-        amount = result.group(1).replace('&nbsp;', ' ')
+        amount = result.group(1).replace('&nbsp;', '')
 
-    time.sleep(1)
-    return amount
+    return int(amount)
 
 
-print(get_report(PERIOD_LAST_THIRTY_DAYS))
-# exit()
-#
-# print("\n".join([
-#     'month: ' + get_report(PERIOD_THIS_MONTH),
-#     'thirty_days: ' + get_report(PERIOD_LAST_THIRTY_DAYS),
-#     'fun: ' + get_report(PERIOD_LAST_THIRTY_DAYS, True),
-# ]))
+last_thirty_days = get_report(PERIOD_LAST_THIRTY_DAYS)
+month = get_report(PERIOD_THIS_MONTH)
+overspending = max(month - 80000, 0)
+
+reports = {
+    'last_thirty_days': human_format(last_thirty_days, 0),
+    'month': human_format(month, 0),
+    'overspending': human_format(overspending, 0)
+}
+
+json_object = json.dumps(reports, separators=(',', ':'))
+print(json_object)
