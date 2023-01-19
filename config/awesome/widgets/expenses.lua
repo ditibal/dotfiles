@@ -32,12 +32,12 @@ Expenses.create = function()
 
     Expenses.update()
 
-    local data = LIP.load(ini_file);
-    local drebe = data.drebe
+    local updatedAt = storage:get('drebe_updated_at')
+    local amount = storage:get('drebe_amount')
 
-    if (drebe ~= nil and drebe.updatedAt ~= nil) then
-        Expenses.updatedAt = drebe.updatedAt
-        Expenses.amount = drebe.amount
+    if (updatedAt ~= nil) then
+        Expenses.updatedAt = updatedAt
+        Expenses.amount = amount
     end
 
     return Expenses.textWidget
@@ -56,14 +56,14 @@ Expenses.update = function(force)
 
     local data = LIP.load(ini_file);
     local drebe = data.drebe
-    local cookie = drebe.cookie
+    local updatedAt = storage:get('drebe_updated_at')
+    local amount = storage:get('drebe_amount')
 
     if (force ~= true
-        and drebe ~= nil
-        and drebe.updatedAt ~= nil
-        and drebe.updatedAt + 7200 > os.time()
+        and updatedAt ~= nil
+        and updatedAt + 7200 > os.time()
     ) then
-        Expenses.updateText(drebe.amount or 'Error')
+        Expenses.updateText(amount or 'Error')
         return
     end
 
@@ -71,19 +71,15 @@ Expenses.update = function(force)
 
     awful.spawn.easy_async(command, function(amount)
         amount = amount or 'Error'
+        amount = string.gsub(amount, '^%s*(.-)%s*$', '%1')
         Expenses.updateText(amount)
-        local updatedAt = os.time()
+        updatedAt = os.time()
 
-        data.drebe = {
-            amount = amount,
-            updatedAt = updatedAt,
-            cookie = cookie
-        }
+        storage:set('drebe_amount', amount)
+        storage:set('drebe_updated_at', updatedAt)
 
         Expenses.updatedAt = updatedAt
         Expenses.amount = amount
-
-        LIP.save(ini_file, data)
 
         print(os.date("[%d/%b/%Y %H:%M:%S] Update drebe"))
     end)
