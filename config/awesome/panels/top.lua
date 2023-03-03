@@ -10,7 +10,6 @@ top_panel.create = function(screen)
     local panel = awful.wibar({
         position = "top",
         screen = screen,
-        height = 24,
     })
 
     local expensesWidget = expenses.create()

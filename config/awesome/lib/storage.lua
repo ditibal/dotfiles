@@ -1,4 +1,4 @@
-local tableIO = require 'libs.tableIO'
+local tableIO = require 'lib.tableIO'
 
 local Storage = {}
 setmetatable(Storage, Storage)

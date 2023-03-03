@@ -1,21 +1,19 @@
 local wibox = require("wibox")
 local vicious = require("vicious")
 
-local netdown_icon = wibox.widget.imagebox(theme.net_down)
-local netup_icon = wibox.widget.imagebox(theme.net_up)
-
 netwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.net)
-vicious.register(netwidget, vicious.widgets.net,
-    '<span color="#CC9393">${enp4s0 down_kb}</span>' ..
-        ' <span color="#7F9F7F">${enp4s0 up_kb}</span>', 2)
+vicious.register(
+        netwidget,
+        vicious.widgets.net,
+        '<b>↓</b> <span color="#CC9393">${enp4s0 down_mb}</span>  <span color="#7F9F7F">${enp4s0 up_mb}</span> <b>↑</b>',
+        2
+)
 
 local networkwidget = wibox.container.margin(netwidget, 0, 0, 5, 5)
 
 local widget = wibox.widget {
-    netdown_icon,
     networkwidget,
-    netup_icon,
     layout = wibox.layout.fixed.horizontal,
 }
 

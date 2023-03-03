@@ -60,7 +60,7 @@ def get_report(period, only_fun=False):
         'r_is_tag': '0',
         'is_cat_childs': 'true' if only_fun else 'false',
         'is_with_rest': 'false',
-        'is_with_planned': 'false',
+        'is_with_planned': 'true',
         'is_course_hist': 'false',
         'is_search_dbls': 'false',
         'r_duty': '0',

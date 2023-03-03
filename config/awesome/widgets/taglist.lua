@@ -1,6 +1,17 @@
 local wibox = require("wibox")
 local awful = require("awful")
 
+local original_taglist_label = awful.widget.taglist.taglist_label
+function awful.widget.taglist.taglist_label(tag, args)
+    local text, bg, bg_image, icon, other_args = original_taglist_label(tag, args)
+
+    if tag.hidden then
+        text = '<span color="#4E4E4E"> ' .. text .. '</span>'
+    end
+
+    return text, bg, bg_image, icon, other_args
+end
+
 local taglist = {}
 
 local taglist_buttons = awful.util.table.join(
@@ -15,11 +26,7 @@ local taglist_buttons = awful.util.table.join(
         end),
 
         awful.button({ }, 3, function(tag)
-            local tags_visible = storage:get('tags_visible', {})
-            tag.hidden = not tag.hidden
-            tags_visible[tag.name:gsub("%s+", "_")] = tag.hidden
-            storage:set('tags_visible', tags_visible)
-            tag:emit_signal("property::name")
+            tag:toggle_hide()
         end)
 )
 

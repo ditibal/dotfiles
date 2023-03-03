@@ -8,24 +8,14 @@
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+local tag = require("lib.awful.tag")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local LIP = require("libs.LIP")
-local Storage = require("libs.storage")
+local LIP = require("lib.LIP")
+local Storage = require("lib.storage")
 
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
-
-local original_taglist_label = awful.widget.taglist.taglist_label
-function awful.widget.taglist.taglist_label(tag, args)
-    local text, bg, bg_image, icon, other_args = original_taglist_label(tag, args)
-
-    if tag.hidden then
-        text = '<span color="#4E4E4E"> ' .. text .. '</span>'
-    end
-
-    return text, bg, bg_image, icon, other_args
-end
 
 
 clients_hidden = true
@@ -174,7 +164,7 @@ layouts = {
 tags = {
     " general ",
     " general 2 ",
-    " slack ",
+    " discord ",
     " autoshina ",
     "t",
     " webpack ",
@@ -185,10 +175,9 @@ tags = {
 }
 
 local tags_visible = storage:get('tags_visible', {})
-
 for screen_id = 1, screen.count() do
     for key, tag_name in ipairs(tags) do
-        awful.tag.add(tag_name, {
+        tag.add(tag_name, {
             screen = screen_id,
             layout = layouts[1],
             hidden = tags_visible[tag_name:gsub("%s+", "_")] or false,

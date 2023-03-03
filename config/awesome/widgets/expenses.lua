@@ -1,14 +1,20 @@
 local wibox = require("wibox")
 local gears = require("gears")
 local awful = require("awful")
-local LIP = require("libs.LIP")
-local json = require("libs.json")
+local LIP = require("lib.LIP")
+local json = require("lib.json")
 
 local text_from_result = function(result)
     local reports = json.decode(result)
-    local text = reports.last_thirty_days .. ' / ' .. reports.month
+    local text = reports.last_thirty_days
 
-    if reports.overspending then
+    if reports.overspending ~= '0' then
+        text = text .. ' / ' .. '<b><span foreground="red">' .. reports.month .. '</span></b>'
+    else
+        text = text .. ' / ' .. reports.month
+    end
+
+    if reports.overspending ~= '0' then
         text = text .. ' / ' .. '<b><span foreground="red">' .. reports.overspending .. '</span></b>'
     end
     return text
