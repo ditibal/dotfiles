@@ -76,6 +76,13 @@ handle_extension() {
             odt2txt "${FILE_PATH}" && exit 5
             exit 1;;
 
+    	# Markdown
+        md)
+            #highlight --syntax=markdown --out-format=ansi "${FILE_PATH}" && exit 5
+            glow -s dark "${FILE_PATH}" && exit 5
+            #bat "${FILE_PATH}" && exit 5
+            exit 1;;		
+
         # HTML
         htm|html|xhtml)
             # Preview as text conversion
@@ -119,19 +126,19 @@ handle_image() {
             exit 7;;
 
         # Video
-        # video/*)
-        #     # Thumbnail
-        #     ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
-        #     exit 1;;
+        video/*)
+            # Thumbnail
+            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
+            exit 1;;
         # PDF
-        # application/pdf)
-        #     pdftoppm -f 1 -l 1 \
-        #              -scale-to-x 1920 \
-        #              -scale-to-y -1 \
-        #              -singlefile \
-        #              -jpeg -tiffcompression jpeg \
-        #              -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
-        #         && exit 6 || exit 1;;
+        application/pdf)
+          pdftoppm -f 1 -l 1 \
+                   -scale-to-x 1920 \
+                   -scale-to-y -1 \
+                   -singlefile \
+                   -jpeg -tiffcompression jpeg \
+                   -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
+              && exit 6 || exit 1;;
 
         # Preview archives using the first image inside.
         # (Very useful for comic book collections for example.)
