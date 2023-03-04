@@ -174,13 +174,12 @@ tags = {
     "t"
 }
 
-local tags_visible = storage:get('tags_visible', {})
 for screen_id = 1, screen.count() do
     for key, tag_name in ipairs(tags) do
         tag.add(tag_name, {
+            id = key,
             screen = screen_id,
             layout = layouts[1],
-            hidden = tags_visible[tag_name:gsub("%s+", "_")] or false,
             selected = key == 1 and true or false
         })
     end
