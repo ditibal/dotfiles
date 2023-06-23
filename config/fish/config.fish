@@ -1,7 +1,6 @@
 set -gx PATH $PATH ~/bin
 set -gx TERM xterm-256color
-set -gx EDITOR xvim
-set -gx GOPATH ~/go
+set -gx EDITOR vim
 set -gx XDG_CACHE_HOME ~/.cache
 set -gx CHEATCOLORS true
 
@@ -13,6 +12,9 @@ function r
         exit
     end
 end
+
+alias rembox "cd ~/tmp/rembox"
+alias work "cd ~/work/vm"
 
 alias l "ls --color=auto -lh"
 alias sp "sudo pacman"
