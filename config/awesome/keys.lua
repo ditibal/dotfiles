@@ -152,7 +152,7 @@ keys.globalkeys = awful.util.table.join(
         -- Capture screen to buffer
         awful.key({ }, "Print",
                 function()
-                    awful.spawn("/usr/bin/bash -c \" sleep 0.2 && scrot -f -s /tmp/scrot-screenshot.png -e 'xclip -selection c -t image/png < $f' && rm /tmp/scrot-screenshot.png  \"")
+                    awful.spawn("flameshot gui")
                 end),
 
         -- Lock screen
