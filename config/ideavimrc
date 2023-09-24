@@ -51,7 +51,9 @@ map <leader>d :action Debug<CR>
 map <leader>r :action RenameElement<CR>
 
 map <leader>w :action CloseContent<CR>
+map tw :action CloseContent<CR>
 map gw :action ReopenClosedTab<CR>
+map tW :action CloseAllEditorsButActive<CR>
 
 
 map <leader>v :action SplitVertically<CR>
