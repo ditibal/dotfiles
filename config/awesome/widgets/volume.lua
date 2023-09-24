@@ -25,10 +25,10 @@ volume.bar:buttons (awful.util.table.join (
             volume.update()
         end),
         awful.button ({}, 4, function()
-            amixer_set('1%+')
+            pactl_set('+1%')
         end),
         awful.button ({}, 5, function()
-            amixer_set('1%-')
+            pactl_set('-1%')
         end)
 ))
 

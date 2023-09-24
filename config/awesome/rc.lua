@@ -17,7 +17,6 @@ local Storage = require("lib.storage")
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
 
-
 clients_hidden = true
 
 awful.client.property.persist("hideable", "boolean")
@@ -73,9 +72,9 @@ function n(var)
     naughty.notify({ text = var })
 end
 
+function pactl_set(step)
+    awful.spawn(string.format("pactl set-sink-volume @DEFAULT_SINK@ %s", step))
 
-function amixer_set(step)
-    awful.spawn(string.format("amixer sset %s %s &> /dev/null", 'Master', step))
     volume.update()
 end
 

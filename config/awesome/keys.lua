@@ -126,22 +126,22 @@ keys.globalkeys = awful.util.table.join(
         -- ALSA volume control
         awful.key({ modkey }, ".",
                 function()
-                    amixer_set('5%+')
+                    pactl_set('+5%')
                 end),
 
         awful.key({ modkey }, ",",
                 function()
-                    amixer_set('5%-')
+                    pactl_set('-5%')
                 end),
 
         awful.key({ modkey, 'Mod1' }, ".",
                 function()
-                    amixer_set('10%+')
+                    pactl_set('+10%')
                 end),
 
         awful.key({ modkey, 'Mod1' }, ",",
                 function()
-                    amixer_set('10%-')
+                    pactl_set('-10%')
                 end),
 
         awful.key({ modkey }, "m",
