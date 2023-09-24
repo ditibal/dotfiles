@@ -13,6 +13,22 @@ function r
     end
 end
 
+if type -q exa
+  alias ls "exa --header"
+  alias ll "ls -l -g"
+  alias lla "ll -a"
+end
+
+if type -q bat
+  alias cat "bat"
+end
+
+if type -q duf
+  alias df "duf"
+end
+
+alias cheat "cheat -c"
+
 alias rembox "cd ~/tmp/rembox"
 alias work "cd ~/work/vm"
 
@@ -25,6 +41,7 @@ alias gb "git branch "
 alias gc "git commit"
 alias gd "git diff"
 alias gito "git checkout "
+
 alias crontab "set -l VISUAL vim; set -l EDITOR vim; /usr/bin/crontab"
 alias v "vagrant"
 alias vssh "vagrant ssh"
