@@ -5,13 +5,14 @@ local gtable = require("gears.table")
 local parent_add = local_tag.add
 function local_tag.add(name, props)
     local tag = parent_add(name, props)
+    local screen_index = props.screen.index
 
     local tags_visible = storage:get('tags_visible', {})
-    tag.hidden = tags_visible['tag_' .. tostring(tag.id)] or false
+    tag.hidden = tags_visible['screen_' .. tostring(screen_index) .. '_tag_' .. tostring(tag.id)] or false
 
     tag:connect_signal("property::hidden", function()
         tags_visible = storage:get('tags_visible', {})
-        tags_visible['tag_' .. tostring(tag.id)] = tag.hidden
+        tags_visible['screen_' .. tostring(screen_index) .. '_tag_' .. tostring(tag.id)] = tag.hidden
         storage:set('tags_visible', tags_visible)
     end)
 

@@ -174,13 +174,30 @@ tags = {
     "t"
 }
 
-for screen_id = 1, screen.count() do
+for key, tag_name in ipairs(tags) do
+    tag.add(tag_name, {
+        id = key,
+        screen = 1,
+        layout = layouts[1],
+        selected = key == 1 and true or false
+    })
+end
+
+if screen[2] ~= nil then
+    -- Tags
+    tags = {
+        " general ",
+        " general 2 ",
+        " general 3 ",
+        " general 4 ",
+    }
+
     for key, tag_name in ipairs(tags) do
         tag.add(tag_name, {
             id = key,
-            screen = screen_id,
+            screen = 2,
             layout = layouts[1],
-            selected = key == 1 and true or false
+            selected = false
         })
     end
 end
@@ -191,11 +208,17 @@ if (gears.filesystem.file_readable(cfg_dir .. 'components/projectmenu.lua')) the
     require('components.projectmenu')
 end
 
-local panels = require('panels.panels')
-awful.screen.connect_for_each_screen(function(s)
-    panels.top.create(s)
-    panels.bottom.create(s)
-end)
+local mainTop = require('panels.main.top')
+local mainBottom = require('panels.main.bottom')
+mainTop.create(screen[1])
+mainBottom.create(screen[1])
+
+if screen[2] ~= nil then
+    local secondTop = require('panels.second.top')
+    local secondBottom = require('panels.second.bottom')
+    secondTop.create(screen[2])
+    secondBottom.create(screen[2])
+end
 
 -- Import Keybinds
 local keys = require("keys")
