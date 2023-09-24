@@ -6,17 +6,20 @@ local json = require("lib.json")
 
 local text_from_result = function(result)
     local reports = json.decode(result)
-    local text = reports.last_thirty_days
+    local text = ''
+
+    text = reports.perfect_spending .. ' / '
 
     if reports.overspending ~= '0' then
-        text = text .. ' / ' .. '<b><span foreground="red">' .. reports.month .. '</span></b>'
+        text = text .. '<b><span foreground="red">' .. reports.month .. '</span></b>'
     else
-        text = text .. ' / ' .. reports.month
+        text = text .. reports.month
     end
 
     if reports.overspending ~= '0' then
         text = text .. ' / ' .. '<b><span foreground="red">' .. reports.overspending .. '</span></b>'
     end
+
     return text
 end
 
@@ -51,7 +54,7 @@ Expenses.create = function()
     Expenses.update()
     Expenses.updatedAt = storage:get('drebe_updated_at')
 
-    return Expenses.textWidget
+    return wibox.container.margin(Expenses.textWidget, 20, 0, 0, 0)
 end
 
 Expenses.update = function(force)
