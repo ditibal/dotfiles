@@ -10,6 +10,7 @@ function rules.create(clientkeys, clientbuttons)
         {
             rule = { },
             properties = {
+                titlebars_enabled = true,
                 border_width = 0,
                 border_color = beautiful.border_normal,
                 focus = true,
