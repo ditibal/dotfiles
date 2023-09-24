@@ -29,7 +29,6 @@ theme.submenu_icon = theme.icon_dir .. "/submenu.png"
 theme.taglist_squares_sel = theme.icon_dir .. "/square_sel.png"
 theme.taglist_squares_unsel = theme.icon_dir .. "/square_unsel.png"
 
-theme.tasklist_disable_icon = true
 theme.tasklist_floating = ""
 theme.tasklist_maximized_horizontal = ""
 theme.tasklist_maximized_vertical = ""
