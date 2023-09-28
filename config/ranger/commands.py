@@ -239,3 +239,10 @@ class compress(Command):
 
         extension = ['.zip', '.tar.gz', '.rar', '.7z']
         return ['compress ' + os.path.basename(self.fm.thisdir.path) + ext for ext in extension]
+
+class toggle_preview(Command):
+    def execute(self):
+        self.fm.settings.preview_files = not self.fm.settings.preview_files
+        self.fm.settings.preview_directories = self.fm.settings.preview_files
+        self.fm.settings.preview_images = self.fm.settings.preview_files
+        self.fm.settings.use_preview_script = self.fm.settings.preview_files
