@@ -160,6 +160,25 @@ layouts = {
     awful.layout.suit.tile.bottom,
 }
 
+if screen[2] ~= nil then
+    -- Tags
+    tags = {
+        " general ",
+        " general 2 ",
+        " general 3 ",
+        " general 4 ",
+    }
+
+    for key, tag_name in ipairs(tags) do
+        tag.add(tag_name, {
+            id = key,
+            screen = 2,
+            layout = layouts[1],
+            selected = key == 1 and true or false,
+        })
+    end
+end
+
 -- Tags
 tags = {
     " general ",
@@ -181,25 +200,6 @@ for key, tag_name in ipairs(tags) do
         layout = layouts[1],
         selected = key == 1 and true or false
     })
-end
-
-if screen[2] ~= nil then
-    -- Tags
-    tags = {
-        " general ",
-        " general 2 ",
-        " general 3 ",
-        " general 4 ",
-    }
-
-    for key, tag_name in ipairs(tags) do
-        tag.add(tag_name, {
-            id = key,
-            screen = 2,
-            layout = layouts[1],
-            selected = false
-        })
-    end
 end
 
 require('components.mainmenu')
