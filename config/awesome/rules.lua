@@ -53,6 +53,7 @@ function rules.create(clientkeys, clientbuttons)
         {
             rule = { class = "TelegramDesktop" },
             properties = {
+                titlebars_enabled = false,
                 floating = true,
                 ontop = true,
                 height = 1200,
