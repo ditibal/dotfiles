@@ -14,7 +14,7 @@ function r
 end
 
 if type -q exa
-  alias ls "exa --header"
+  alias ls "exa --header --icons"
   alias ll "ls -l -g"
   alias lla "ll -a"
 end
