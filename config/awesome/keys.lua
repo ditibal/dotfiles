@@ -179,7 +179,7 @@ keys.globalkeys = awful.util.table.join(
         awful.key({ modkey }, "y",
                 function()
                     awesome.emit_signal("logout")
-                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause")
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.strawberry /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause")
                     awful.spawn("xset dpms force suspend")
                     awful.spawn.easy_async("python2 " .. cfg_dir .. "/slimlock.py", function()
                         awesome.emit_signal("login")
@@ -213,17 +213,17 @@ keys.globalkeys = awful.util.table.join(
 
         awful.key({ modkey }, "s",
                 function()
-                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.strawberry /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
                 end),
 
         awful.key({ modkey }, "a",
                 function()
-                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.strawberry /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
                 end),
 
         awful.key({ modkey }, "d",
                 function()
-                    awful.spawn("qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
+                    awful.spawn("qdbus org.mpris.MediaPlayer2.strawberry /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
                 end),
 
         awful.key({ modkey }, "F12", function()
