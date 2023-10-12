@@ -7,6 +7,7 @@ top_panel.create = function(screen)
     local taglist = require('widgets.taglist')
     local expenses = require('widgets.expenses')
     local audio_output = require('widgets.audio_output')
+    local vpn_credit_btn = require('widgets.vpn_credit')
 
     local panel = awful.wibar({
         position = "top",
@@ -21,6 +22,7 @@ top_panel.create = function(screen)
             layout = wibox.layout.fixed.horizontal,
             taglist.create(screen),
             expenses_widget,
+            vpn_credit_btn.widget,
         },
         nil,
         {
