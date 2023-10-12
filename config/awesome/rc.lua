@@ -131,7 +131,7 @@ beautiful.init(theme_dir .. "/holo/theme.lua")
 storage = Storage(cfg_dir .. "storage_data.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 
 -- Default modkey.
