@@ -6,26 +6,28 @@ local top_panel = {}
 top_panel.create = function(screen)
     local taglist = require('widgets.taglist')
     local expenses = require('widgets.expenses')
+    local audio_output = require('widgets.audio_output')
 
     local panel = awful.wibar({
         position = "top",
         screen = screen,
     })
 
-    local expensesWidget = expenses.create()
+    local expenses_widget = expenses.create()
 
     panel:setup {
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,
             taglist.create(screen),
-            expensesWidget,
+            expenses_widget,
         },
         nil,
         {
             layout = wibox.layout.fixed.horizontal,
             require('widgets.network'),
             require('widgets.cpu'),
+            audio_output.create(),
             require('widgets.volume'),
         },
     }

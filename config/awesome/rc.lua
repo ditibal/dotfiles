@@ -14,6 +14,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local LIP = require("lib.LIP")
 local Storage = require("lib.storage")
+local python = require('python')
 
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
@@ -121,6 +122,8 @@ home_dir = os.getenv("HOME")
 cfg_dir = awful.util.getdir("config")
 ini_file = cfg_dir .. "/data.ini"
 theme_dir = cfg_dir .. "/themes"
+
+python.import("sys").path.insert(0, cfg_dir .. "/python")
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(theme_dir .. "/holo/theme.lua")
