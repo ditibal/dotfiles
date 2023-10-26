@@ -23,9 +23,11 @@ Pulse.create = function()
 
     local widget = wibox.container.margin(Pulse.textWidget, 0, 15)
 
-    widget:connect_signal('button::press', function()
-        Pulse.pulse_ctr.switch_sink()
-        Pulse.update()
+    widget:connect_signal('button::press', function(_, _, _, button)
+        if button == 1 then
+            Pulse.pulse_ctr.switch_sink()
+            Pulse.update()
+        end
     end)
 
     return widget
