@@ -1,0 +1,67 @@
+version: "1"
+
+includes:
+  - comp.yaml
+
+groups:
+  full:
+    - comp
+    - shop
+    - yandex
+
+base:
+  password-file: "{{ .Env.HOME }}/restic/password.txt"
+  initialize: true
+  one-file-system: true
+  check-after: true
+  force-inactive-lock: true
+
+  backup:
+    verbose: true
+    schedule-priority: background
+  retention:
+    after-backup: true
+    prune: true
+
+
+comp:
+  inherit: base
+  repository: "local:/run/media/ditibal/hard/backups/comp"
+
+  backup:
+    source:
+      - "{{ .Env.HOME }}"
+    schedule: '*-*-* 05:00:00'
+    schedule-permission: user
+    schedule-priority: background
+    schedule-log: "{{ .Env.HOME }}/log/restic/comp.log"
+  retention:
+    keep-within: 60d
+
+yandex:
+  inherit: comp
+  repository: "rclone:yandex:backups/comp"
+
+  backup:
+    schedule: '*-*-* 02:00:00'
+    schedule-log: "{{ .Env.HOME }}/log/restic/yandex.log"
+  retention:
+    keep-within: 60d
+
+shop:
+  inherit: base
+  repository: "local:/run/media/ditibal/hard/backups/shop"
+
+  backup:
+    stdin: true
+    stdin-command: "ssh uasrv 'mysqldump -u{{ .Env.MYSQL_USERNAME }} -p{{ .Env.MYSQL_PASSWORD }} {{ .Env.MYSQL_DATABASE }}'"
+    stdin-filename: "dump.sql"
+    tag:
+      - mysql
+      - stdin
+    schedule: '*-*-* 01:00:00'
+    schedule-permission: user
+    schedule-priority: background
+    schedule-log: "{{ .Env.HOME }}/log/restic/shop.log"
+  retention:
+    keep-within: 160d

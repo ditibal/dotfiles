@@ -1,0 +1,12 @@
+version: "1"
+
+
+comp:
+  backup:
+    exclude:
+      - "/home/ditibal/.*"
+      - "/home/ditibal/VirtualBox VMs"
+      - "/home/ditibal/__РАЗОБРАТЬ/autoshina-documents"
+      - "/home/ditibal/backup/shop"
+      - "/home/ditibal/game"
+      - "/home/ditibal/ditibal/ditibal/current"
