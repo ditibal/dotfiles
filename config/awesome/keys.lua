@@ -189,26 +189,44 @@ keys.globalkeys = awful.util.table.join(
 
         awful.key({ modkey }, "r",
                 function()
-                    for _, c in ipairs(client.get()) do
-                        if c.id == 'ranger' then
-                            c:move_to_tag(client.focus.first_tag)
-                            client.focus = c
-                            c:raise()
-                            return
-                        end
-                    end
+                    --for _, c in ipairs(client.get()) do
+                    --    if c.id == 'ranger' then
+                    --        c:move_to_tag(client.focus.first_tag)
+                    --        client.focus = c
+                    --        c:raise()
+                    --        return
+                    --    end
+                    --end
 
-                    awful.spawn.raise_or_spawn('xterm -e /bin/fish -c "ranger"', {}, function(c)
-                        c.id = 'ranger'
+                    awful.spawn.raise_or_spawn('alacritty -e /bin/fish -c "ranger"', {}, function(c)
+                        --c.id = 'ranger'
+                        --
+                        --client.focus = c
+                        --c:raise()
 
-                        client.focus = c
-                        c:raise()
+                        return false
                     end)
                 end),
 
         awful.key({ modkey }, "u",
                 function()
                     awesome.emit_signal("show_projectmenu")
+                end),
+
+        awful.key({ }, "F1",
+                function()
+                    --awful.spawn.spawn('xterm -e /bin/fish -c "ranger"', {}, function(c)
+                    --    n('asfd')
+                    --    --c.previousFocusedClient = client.focus
+                    --    --c:move_to_screen(2)
+                    --end)
+
+                    f = client.focus
+                    f:raise()
+                    client.focus = nil
+                    awful.spawn("python /home/ditibal/test.py")
+                    client.focus = f
+                    f:raise()
                 end),
 
         awful.key({ modkey }, "s",
