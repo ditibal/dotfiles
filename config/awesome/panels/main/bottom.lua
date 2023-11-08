@@ -35,7 +35,6 @@ bottom_panel.create = function(screen)
     })
 
     local clockwidget = wibox.widget.textclock(markup("#FFFFFF", "%H:%M   " .. markup.font("Noto 4", " ")))
-    clockwidget.forced_width = 65
 
     local panel = awful.wibar({
         position = "bottom",
