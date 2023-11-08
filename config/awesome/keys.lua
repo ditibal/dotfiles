@@ -4,14 +4,15 @@ local gmath = require("gears.math")
 
 local keys = {}
 
-function viewidx(i)
+function viewidx(i, force)
+    force = force or false
     local screen = awful.screen.focused()
     local tags = screen.tags
     local showntags = {}
     local sel = screen.selected_tag
 
     for _, t in ipairs(tags) do
-        if not t.hide and not t.hidden then
+        if force or (not t.hide and not t.hidden) then
             table.insert(showntags, t)
         else
             if t == sel then
@@ -29,12 +30,12 @@ function viewidx(i)
     screen:emit_signal("tag::history::update")
 end
 
-function viewnext()
-    viewidx(1)
+function viewnext(force)
+    viewidx(1, force)
 end
 
-function viewprev()
-    viewidx(-1)
+function viewprev(force)
+    viewidx(-1, force)
 end
 
 keys.globalkeys = awful.util.table.join(
@@ -46,6 +47,16 @@ keys.globalkeys = awful.util.table.join(
         awful.key({ modkey }, "l",
                 function()
                     viewnext()
+                end),
+
+        awful.key({ modkey, 'Shift' }, "h",
+                function()
+                    viewprev(true)
+                end),
+
+        awful.key({ modkey, 'Shift' }, "l",
+                function()
+                    viewnext(true)
                 end),
 
         awful.key({ modkey }, "k",
@@ -66,6 +77,16 @@ keys.globalkeys = awful.util.table.join(
         awful.key({ modkey }, "Right",
                 function()
                     viewnext()
+                end),
+
+        awful.key({ modkey, "Shift" }, "Left",
+                function()
+                    viewprev(true)
+                end),
+
+        awful.key({ modkey, "Shift" }, "Right",
+                function()
+                    viewnext(true)
                 end),
 
         awful.key({ modkey, "Control" }, "Right",
