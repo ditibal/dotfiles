@@ -6,6 +6,7 @@ local top_panel = {}
 top_panel.create = function(screen)
     local taglist = require('widgets.taglist')
     local expenses = require('widgets.expenses')
+    local calendar = require('widgets.calendar')
     local audio_output = require('widgets.audio_output')
     local vpn_credit_btn = require('widgets.vpn_credit')
 
@@ -15,6 +16,27 @@ top_panel.create = function(screen)
     })
 
     local expenses_widget = expenses.create()
+    local cal = calendar.create()
+
+    local widget = wibox.widget {
+        {
+            {
+                {
+                    markup = 'Добавить вывод текущей задачи',
+                    widget = wibox.widget.textbox
+                },
+                left = 10,
+                right = 10,
+                widget = wibox.container.margin
+            },
+            bg = '#87d75f',
+            id = 'background',
+            widget = wibox.container.background
+        },
+        left = 20,
+        right = 0,
+        widget = wibox.container.margin
+    }
 
     panel:setup {
         layout = wibox.layout.align.horizontal,
@@ -23,6 +45,8 @@ top_panel.create = function(screen)
             taglist.create(screen),
             expenses_widget,
             vpn_credit_btn.widget,
+            cal,
+            widget,
         },
         nil,
         {
