@@ -5,7 +5,7 @@ set -gx XDG_CACHE_HOME ~/.cache
 set -gx CHEATCOLORS true
 
 function r
-    alias r "ranger"
+    alias r ranger
     if not set -q RANGER_LEVEL
         ranger
     else
@@ -14,17 +14,17 @@ function r
 end
 
 if type -q exa
-  alias ls "exa --header --icons"
-  alias ll "ls -l -g"
-  alias lla "ll -a"
+    alias ls "exa --header --icons"
+    alias ll "ls -l -g"
+    alias lla "ll -a"
 end
 
 if type -q bat
-  alias cat "bat"
+    alias cat bat
 end
 
 if type -q duf
-  alias df "duf"
+    alias df duf
 end
 
 alias cheat "cheat -c"
@@ -43,7 +43,7 @@ alias gd "git diff"
 alias gito "git checkout "
 
 alias crontab "set -l VISUAL vim; set -l EDITOR vim; /usr/bin/crontab"
-alias v "vagrant"
+alias v vagrant
 alias vssh "vagrant ssh"
 
 alias awesome-restart="echo 'awesome.restart()' | awesome-client"
@@ -53,6 +53,6 @@ alias poweroff "sudo systemctl poweroff"
 alias halt "sudo systemctl halt"
 
 if status is-interactive
-and not set -q TMUX
+    and not set -q TMUX
     exec tmux
 end
