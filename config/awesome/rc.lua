@@ -132,7 +132,7 @@ storage = Storage(cfg_dir .. "storage_data.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "vim"
+editor = os.getenv("EDITOR") or "nvim"
 
 -- Default modkey.
 modkey = "Mod4"

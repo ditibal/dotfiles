@@ -1,6 +1,6 @@
 set -gx PATH $PATH ~/bin
 set -gx TERM xterm-256color
-set -gx EDITOR vim
+set -gx EDITOR nvim
 set -gx XDG_CACHE_HOME ~/.cache
 set -gx CHEATCOLORS true
 
