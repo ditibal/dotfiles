@@ -1,0 +1,1 @@
+dotbot -d ~/dotfiles -c ~/dotfiles/install.conf.yaml --plugin-dir ~/dotfiles/dotbot/plugins

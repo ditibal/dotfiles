@@ -1,0 +1,29 @@
+- defaults:
+    link:
+      relink: true
+      relative: /home/ditibal
+
+- link:
+    ~/.ideavimrc: config/ideavimrc
+    ~/.gitconfig: config/gitconfig
+    ~/.config/awesome: config/awesome
+    ~/.config/fish: config/fish
+    ~/.config/ranger: config/ranger
+    ~/.config/rofi: config/rofi
+
+- yay:
+    - neovim
+    - fish
+    - ranger
+    - ripgrep
+    - flameshot
+    - rofi
+    - python-google-auth-oauthlib
+    - python-google-api-python-client
+    - python-google-auth
+    - handlr
+    - bat
+    - eza
+    - duf
+    - phpstorm
+    - intellij-idea-community-edition
