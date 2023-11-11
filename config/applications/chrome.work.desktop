@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=chromium --user-data-dir="projects/work/chrome"
+Name=Chrome Work
+Icon=chromium
