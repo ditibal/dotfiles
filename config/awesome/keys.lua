@@ -138,10 +138,7 @@ keys.globalkeys = awful.util.table.join(
         -- dmenu
         awful.key({ modkey }, "/",
             function()
-                awful.spawn(
-                    "/usr/bin/bash -c \"export LANGUAGE=en_US.UTF8; export PATH=$PATH:~/bin;" ..
-                        "dmenu_run -b -i -fn " ..
-                        "'-*-dejavu sans mono-*-r-*-*-16-*-*-*-*-*-*-*' -p 'run:'\"")
+                awful.spawn("rofi -show drun")
             end),
 
         -- ALSA volume control
