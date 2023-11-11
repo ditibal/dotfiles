@@ -10,6 +10,7 @@
     ~/.config/fish: config/fish
     ~/.config/ranger: config/ranger
     ~/.config/rofi: config/rofi
+    ~/.tmux.conf: config/tmux.conf
 
 - yay:
     - neovim
