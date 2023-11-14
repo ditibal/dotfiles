@@ -23,6 +23,10 @@ if type -q bat
     alias cat bat
 end
 
+if type -q nvim
+    alias vim nvim
+end
+
 if type -q duf
     alias df duf
 end
@@ -43,7 +47,7 @@ alias gd "git diff"
 alias gito "git checkout "
 
 alias crontab "set -l VISUAL vim; set -l EDITOR vim; /usr/bin/crontab"
-alias v vagrant
+alias v vim
 alias vssh "vagrant ssh"
 
 alias awesome-restart="echo 'awesome.restart()' | awesome-client"
