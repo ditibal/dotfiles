@@ -56,6 +56,8 @@ alias reboot "sudo systemctl reboot"
 alias poweroff "sudo systemctl poweroff"
 alias halt "sudo systemctl halt"
 
+set fzf_fd_opts --hidden --exclude=.git
+
 if status is-interactive
     and not set -q TMUX
     exec tmux
