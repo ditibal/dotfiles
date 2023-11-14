@@ -26,6 +26,8 @@
     - bat
     - eza
     - duf
+    - fzf
+    - fd
     - vicious
     - lain
     - phpstorm
