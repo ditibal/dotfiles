@@ -14,7 +14,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local LIP = require("lib.LIP")
 local Storage = require("lib.storage")
-local python = require('python')
+local python = require("python")
 
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
@@ -51,7 +51,7 @@ function update_hidden_clients()
                 c:emit_signal("request::activate", "client.focus.byidx", { raise = true })
                 c.focusable = false
 
-                if c.id == 'shop' then
+                if c.id == "shop" then
                     c.opacity = 0.5
                 end
 
@@ -67,11 +67,11 @@ end
 
 -- Functions
 function d(var, depth)
-    gears.debug.dump(var, 'dump', depth)
+    gears.debug.dump(var, "dump", depth)
 end
 
 function n(var)
-    naughty.notify({ text = var })
+	naughty.notify({ text = var })
 end
 
 function pactl_set(step)
@@ -84,14 +84,12 @@ function trim(s)
     return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-
 -- Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-    awful.util.spawn_with_shell("notify-send -u 'critical' " ..
-            "'Oops, there were errors during startup!'" ..
-            awesome.startup_errors
+    awful.util.spawn_with_shell(
+            "notify-send -u 'critical' " .. "'Oops, there were errors during startup!'" .. awesome.startup_errors
     )
 end
 
@@ -105,16 +103,18 @@ do
         end
         in_error = true
 
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = tostring(err) })
+        naughty.notify({
+            preset = naughty.config.presets.critical,
+            title = "Oops, an error happened!",
+            text = tostring(err),
+        })
         in_error = false
     end)
 end
 
 -- Some initializations
 -- set the local settings
-os.setlocale('es_ES.UTF-8')
+os.setlocale("es_ES.UTF-8")
 
 -- Variable definitions
 -- Directories
@@ -149,10 +149,10 @@ if beautiful.wallpaper then
     end
 end
 
-local file = io.open(ini_file, 'r')
-if (file == nil) then
+local file = io.open(ini_file, "r")
+if file == nil then
     data = {}
-    LIP.save(ini_file, data);
+    LIP.save(ini_file, data)
 end
 
 -- Layouts
@@ -193,7 +193,7 @@ tags = {
     " work ",
     "t",
     " shop ",
-    "t"
+    "t",
 }
 
 for key, tag_name in ipairs(tags) do
@@ -201,24 +201,24 @@ for key, tag_name in ipairs(tags) do
         id = key,
         screen = 1,
         layout = layouts[1],
-        selected = key == 1 and true or false
+        selected = key == 1 and true or false,
     })
 end
 
-require('components.mainmenu')
+require("components.mainmenu")
 
-if (gears.filesystem.file_readable(cfg_dir .. 'components/projectmenu.lua')) then
-    require('components.projectmenu')
+if gears.filesystem.file_readable(cfg_dir .. "components/projectmenu.lua") then
+    require("components.projectmenu")
 end
 
-local mainTop = require('panels.main.top')
-local mainBottom = require('panels.main.bottom')
+local mainTop = require("panels.main.top")
+local mainBottom = require("panels.main.bottom")
 mainTop.create(screen[1])
 mainBottom.create(screen[1])
 
 if screen[2] ~= nil then
-    local secondTop = require('panels.second.top')
-    local secondBottom = require('panels.second.bottom')
+    local secondTop = require("panels.second.top")
+    local secondBottom = require("panels.second.bottom")
     secondTop.create(screen[2])
     secondBottom.create(screen[2])
 end
@@ -231,15 +231,13 @@ root.keys(keys.globalkeys)
 local create_rules = require("rules").create
 awful.rules.rules = create_rules(keys.clientkeys, keys.clientbuttons)
 
-
 -- Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c, startup)
     if not startup then
         -- Put windows in a smart way, only if they does not set an initial
         -- position.
-        if not c.size_hints.user_position and
-                not c.size_hints.program_position then
+        if not c.size_hints.user_position and not c.size_hints.program_position then
             awful.placement.no_overlap(c)
             awful.placement.no_offscreen(c)
         end
@@ -256,29 +254,29 @@ awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
     local buttons = gears.table.join(
-            awful.button({ }, 1, function()
+            awful.button({}, 1, function()
                 c:emit_signal("request::activate", "titlebar", { raise = true })
                 awful.mouse.client.move(c)
             end),
-            awful.button({ }, 3, function()
+            awful.button({}, 3, function()
                 c:emit_signal("request::activate", "titlebar", { raise = true })
                 awful.mouse.client.resize(c)
             end)
     )
 
-    awful.titlebar(c):setup {
+    awful.titlebar(c):setup({
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
-            layout = wibox.layout.fixed.horizontal
+            layout = wibox.layout.fixed.horizontal,
         },
         { -- Middle
             { -- Title
                 align = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
+                widget = awful.titlebar.widget.titlewidget(c),
             },
             buttons = buttons,
-            layout = wibox.layout.flex.horizontal
+            layout = wibox.layout.flex.horizontal,
         },
         { -- Right
             awful.titlebar.widget.floatingbutton(c),
@@ -286,8 +284,8 @@ client.connect_signal("request::titlebars", function(c)
             awful.titlebar.widget.stickybutton(c),
             awful.titlebar.widget.ontopbutton(c),
             awful.titlebar.widget.closebutton(c),
-            layout = wibox.layout.fixed.horizontal()
+            layout = wibox.layout.fixed.horizontal(),
         },
-        layout = wibox.layout.align.horizontal
-    }
+        layout = wibox.layout.align.horizontal,
+    })
 end)
