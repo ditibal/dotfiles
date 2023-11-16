@@ -119,6 +119,7 @@ os.setlocale("es_ES.UTF-8")
 -- Variable definitions
 -- Directories
 home_dir = os.getenv("HOME")
+hostname = os.getenv("HOSTNAME")
 cfg_dir = awful.util.getdir("config")
 ini_file = cfg_dir .. "/data.ini"
 theme_dir = cfg_dir .. "/themes"
@@ -153,6 +154,16 @@ local file = io.open(ini_file, "r")
 if file == nil then
     data = {}
     LIP.save(ini_file, data)
+end
+
+if hostname == 'laptop' then
+    TELEGRAM_WIDTH = 700
+    TELEGRAM_HEIGHT = 1000
+end
+
+if hostname == 'comp' then
+    TELEGRAM_WIDTH = 900
+    TELEGRAM_HEIGHT = 1200
 end
 
 -- Layouts
