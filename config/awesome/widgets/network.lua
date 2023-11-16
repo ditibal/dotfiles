@@ -1,12 +1,17 @@
 local wibox = require("wibox")
 local vicious = require("vicious")
 
-netwidget = wibox.widget.textbox()
+local netwidget = wibox.widget.textbox()
+local template = string.format(
+        '<b>↓</b> <span color="#CC9393">${%s down_mb}</span>  <span color="#7F9F7F">${%s up_mb}</span> <b>↑</b>',
+        NETWORK_INTERFACE,
+        NETWORK_INTERFACE
+)
 vicious.cache(vicious.widgets.net)
 vicious.register(
         netwidget,
         vicious.widgets.net,
-        '<b>↓</b> <span color="#CC9393">${enp5s0 down_mb}</span>  <span color="#7F9F7F">${enp5s0 up_mb}</span> <b>↑</b>',
+        template,
         2
 )
 

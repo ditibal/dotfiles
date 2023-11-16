@@ -159,11 +159,13 @@ end
 if hostname == 'laptop' then
     TELEGRAM_WIDTH = 700
     TELEGRAM_HEIGHT = 1000
+    NETWORK_INTERFACE = 'wlp0s20f3'
 end
 
 if hostname == 'comp' then
     TELEGRAM_WIDTH = 900
     TELEGRAM_HEIGHT = 1200
+    NETWORK_INTERFACE = 'enp5s0'
 end
 
 -- Layouts
