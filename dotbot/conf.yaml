@@ -4,12 +4,13 @@
       relative: /home/ditibal
 
 - link:
-    ~/.ideavimrc: config/ideavimrc
-    ~/.gitconfig: config/gitconfig
     ~/.config/awesome: config/awesome
     ~/.config/fish: config/fish
+    ~/.config/nvim: config/nvim
     ~/.config/ranger: config/ranger
     ~/.config/rofi: config/rofi
+    ~/.gitconfig: config/gitconfig
+    ~/.ideavimrc: config/ideavimrc
     ~/.tmux.conf: config/tmux.conf
 
 - yay:
@@ -37,6 +38,7 @@
     - phpstorm
     - intellij-idea-community-edition
     - highlight
+    - atool
 
 - shell:
       - bash -c 'if [ ! -d ~/.tmux/plugins/tpm ]; then git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi'
