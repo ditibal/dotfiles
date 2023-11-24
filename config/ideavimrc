@@ -39,8 +39,8 @@ map J 7j
 map <leader>u :action LocalHistory.ShowHistory<CR>
 nmap se <Action>(ShowErrorDescription)
 
-" nmap <A-k> <Action>(NextTab)
-" nmap <A-j> <Action>(PreviousTab)
+nmap <A-k> <Action>(NextTab)
+nmap <A-j> <Action>(PreviousTab)
 
 map <C-PageDown> :action NextTab<CR>
 map <C-PageUp> :action PreviousTab<CR>
