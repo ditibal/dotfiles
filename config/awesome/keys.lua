@@ -65,10 +65,21 @@ local client_map = {
     end, "Paste client" },
 }
 
+local tag_map = {
+    { "n", function()
+        local screen = awful.screen.focused()
+        screen.selected_tag:toggle_hide()
+    end, "Toggle tag" },
+}
+
 
 keys.globalkeys = awful.util.table.join(
         awful.key({ modkey }, "w", function()
             modalbind.grab { keymap = client_map, name = "Windows", stay_in_mode = false }
+        end),
+
+        awful.key({ modkey }, "t", function()
+            modalbind.grab { keymap = tag_map, name = "Tags", stay_in_mode = false }
         end),
 
         awful.key({ modkey }, ";", function()
@@ -306,7 +317,7 @@ keys.globalkeys = awful.util.table.join(
                     update_hidden_clients()
                 end),
 
-        awful.key({ modkey }, "t",
+        awful.key({ modkey, "Shift" }, "t",
                 function()
                     awful.spawn("telegram-desktop")
                 end)
