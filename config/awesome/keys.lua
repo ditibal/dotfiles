@@ -39,6 +39,10 @@ function viewprev(force)
 end
 
 keys.globalkeys = awful.util.table.join(
+        awful.key({ modkey }, ";", function()
+            awful.spawn("python " .. cfg_dir .. '/python/actions.py')
+        end),
+
         awful.key({ modkey }, "h",
                 function()
                     viewprev()
@@ -124,11 +128,6 @@ keys.globalkeys = awful.util.table.join(
                     awful.client.focus.byidx(-1)
                 end),
 
-        awful.key({ modkey }, "w",
-                function()
-                    awesome.emit_signal("show_mainmenu")
-                end),
-
         -- hide / show Wibox
         awful.key({ modkey }, "b",
             function()
@@ -168,12 +167,6 @@ keys.globalkeys = awful.util.table.join(
                     awful.spawn(string.format("amixer set %s toggle", 'Master'))
                     volume.update()
                 end),
-
-        --awful.key({ modkey }, "w",
-        --        function()
-        --            awful.spawn.with_shell("sleep 0.2; xdotool mousedown 1")
-        --            -- awesome.emit_signal("show_mainmenu")
-        --        end),
 
         -- Standard program
         awful.key({ modkey }, "Return", function()

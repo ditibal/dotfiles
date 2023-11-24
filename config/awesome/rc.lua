@@ -218,8 +218,6 @@ for key, tag_name in ipairs(tags) do
     })
 end
 
-require("components.mainmenu")
-
 if gears.filesystem.file_readable(cfg_dir .. "components/projectmenu.lua") then
     require("components.projectmenu")
 end
