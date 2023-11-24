@@ -64,3 +64,8 @@ map <C-w>h :action PrevSplitter<CR>
 
 map mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
 vmap mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
+
+Plug 'preservim/nerdtree'
+map <leader>t :NERDTree<CR>
+let g:NERDTreeMapActivateNode = 'l'
+let g:NERDTreeMapJumpParent = 'h'
