@@ -36,7 +36,8 @@ vnoremap < <gv
 map K 7k
 map J 7j
 
-map <leader>u :action LocalHistory.ShowHistory<CR>
+nmap <leader>u :action LocalHistory.ShowHistory<CR>
+nmap <leader>r :source '~/.ideavimrc'<CR>
 nmap se <Action>(ShowErrorDescription)
 
 nmap <A-k> <Action>(NextTab)
