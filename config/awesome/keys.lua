@@ -1,6 +1,9 @@
 local awful = require("awful")
 local table = table
 local gmath = require("gears.math")
+local modalbind = require("lib.modalbind")
+
+modalbind.init()
 
 local keys = {}
 
@@ -38,7 +41,36 @@ function viewprev(force)
     viewidx(-1, force)
 end
 
+client_buffer = nil
+
+local client_map = {
+    { { "Shift" }, "n", function()
+        awful.client.restore()
+    end, "Restore client" },
+
+    { "x", function()
+        if client.focus then
+            client_buffer = client.focus
+        end
+    end, "Cut client" },
+
+    { "v", function()
+        if client_buffer then
+            local screen = awful.screen.focused()
+            client_buffer:move_to_tag(screen.selected_tag)
+            client_buffer:emit_signal("request::activate", "client.focus.byidx", { raise = true })
+            client_buffer = nil
+        end
+
+    end, "Paste client" },
+}
+
+
 keys.globalkeys = awful.util.table.join(
+        awful.key({ modkey }, "w", function()
+            modalbind.grab { keymap = client_map, name = "Windows", stay_in_mode = false }
+        end),
+
         awful.key({ modkey }, ";", function()
             awful.spawn("python " .. cfg_dir .. '/python/actions.py')
         end),
