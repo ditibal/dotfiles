@@ -12,6 +12,10 @@ def awesome_quit():
 def edit_hosts():
     os.system("alacritty -e /bin/nvim /etc/hosts")
 
+
+def suspend():
+    os.system("systemctl suspend")
+
 actions = [
     {
         'label': 'Restart Awesome',
@@ -24,6 +28,10 @@ actions = [
     {
         'label': 'Edit hosts',
         'action': edit_hosts,
+    },
+    {
+        'label': 'Suspend',
+        'action': suspend,
     }
 ]
 
