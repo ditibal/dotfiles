@@ -12,6 +12,7 @@
     ~/.gitconfig: config/gitconfig
     ~/.ideavimrc: config/ideavimrc
     ~/.tmux.conf: config/tmux.conf
+    ~/.xprofile: config/xprofile
 
 - yay:
     - firefox
