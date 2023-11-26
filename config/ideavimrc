@@ -62,6 +62,8 @@ map <leader>v :action SplitVertically<CR>
 
 map <C-w>l :action NextSplitter<CR>
 map <C-w>h :action PrevSplitter<CR>
+map gh :action Back<CR>
+map gl :action Forward<CR>
 
 map mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
 vmap mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
