@@ -14,7 +14,7 @@
     ~/.ideavimrc: config/ideavimrc
     ~/.tmux.conf: config/tmux.conf
     ~/.xprofile: config/xprofile
-    ~/.local/bin/actions: actions/actions.py
+    ~/.local/bin: bin
 
 - yay:
     - firefox
