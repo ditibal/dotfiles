@@ -83,7 +83,7 @@ keys.globalkeys = awful.util.table.join(
         end),
 
         awful.key({ modkey }, ";", function()
-            awful.spawn("python " .. cfg_dir .. '/python/actions.py')
+            awful.spawn("actions")
         end),
 
         awful.key({ modkey }, "h",

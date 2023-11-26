@@ -1,6 +1,7 @@
 - defaults:
     link:
       relink: true
+      create: true
       relative: /home/ditibal
 
 - link:
@@ -13,6 +14,7 @@
     ~/.ideavimrc: config/ideavimrc
     ~/.tmux.conf: config/tmux.conf
     ~/.xprofile: config/xprofile
+    ~/.local/bin/actions: actions/actions.py
 
 - yay:
     - firefox

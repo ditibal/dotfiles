@@ -1,3 +1,5 @@
+#!/bin/python
+
 from rofi import Rofi
 import os
 
@@ -12,6 +14,9 @@ def awesome_quit():
 def edit_hosts():
     os.system("alacritty -e /bin/nvim /etc/hosts")
 
+def help():
+    os.system("alacritty -e frogmouth ~/dotfiles/cheatsheet.md")
+
 
 def suspend():
     os.system("systemctl suspend")
@@ -19,20 +24,29 @@ def suspend():
 actions = [
     {
         'label': 'Restart Awesome',
+        'name': 'awesome_restart',
         'action': awesome_restart,
     },
     {
         'label': 'Quit',
+        'name': 'awesome_quit',
         'action': awesome_quit,
     },
     {
         'label': 'Edit hosts',
+        'name': 'edit_hosts',
         'action': edit_hosts,
     },
     {
         'label': 'Suspend',
+        'name': 'suspend',
         'action': suspend,
-    }
+    },
+    {
+        'label': 'Help',
+        'name': 'help',
+        'action': help,
+    },
 ]
 
 
@@ -41,8 +55,6 @@ def run_action(index):
         obj = actions[index]
         action_func = obj['action']
         action_func()
-    else:
-        print("Недопустимый индекс!")
 
 
 def show():
