@@ -50,3 +50,5 @@
       - [desktop-file-install --dir=$HOME/.local/share/applications config/applications/keepass.desktop]
       - [desktop-file-install --dir=$HOME/.local/share/applications config/applications/chrome.work.desktop]
       - [desktop-file-install --dir=$HOME/.local/share/applications config/applications/chrome.shop.desktop]
+      - [desktop-file-install --dir=$HOME/.local/share/applications config/applications/browser.desktop]
+      - [default_browser set-default]

@@ -1,1 +1,2 @@
 export HOSTNAME=$(hostname)
+source ~/.xprofile.local 2> /dev/null
