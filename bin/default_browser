@@ -29,8 +29,8 @@ if [[ $1 =~ "fast-system" ]]; then
 
 		BROWSER="chromium"
 
-		if command -v "$1" &>/dev/null; then
-			BROWSER="$1"
+		if command -v "google-chrome-stable" &>/dev/null; then
+			BROWSER="google-chrome-stable"
 		fi
 
 		$BROWSER --user-data-dir=$WORK_DIR/chrome $1
