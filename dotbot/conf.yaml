@@ -28,7 +28,7 @@
     - python-google-auth-oauthlib
     - python-google-api-python-client
     - python-google-auth
-    - python-rofi
+    - python-rofi-git
     - handlr
     - bat
     - eza
