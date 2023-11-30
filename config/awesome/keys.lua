@@ -63,12 +63,12 @@ keys.globalkeys = awful.util.table.join(
 
         awful.key({ modkey, 'Shift' }, "h",
                 function()
-                    viewprev(true)
+                    awful.tag.viewprev(true)
                 end),
 
         awful.key({ modkey, 'Shift' }, "l",
                 function()
-                    viewnext(true)
+                    awful.tag.viewnext(true)
                 end),
 
         awful.key({ modkey }, "k",
@@ -83,22 +83,22 @@ keys.globalkeys = awful.util.table.join(
 
         awful.key({ modkey }, "Left",
                 function()
-                    viewprev()
+                    awful.tag.viewprev()
                 end),
 
         awful.key({ modkey }, "Right",
                 function()
-                    viewnext()
+                    awful.tag.viewnext()
                 end),
 
         awful.key({ modkey, "Shift" }, "Left",
                 function()
-                    viewprev(true)
+                    awful.tag.viewprev(true)
                 end),
 
         awful.key({ modkey, "Shift" }, "Right",
                 function()
-                    viewnext(true)
+                    awful.tag.viewnext(true)
                 end),
 
         awful.key({ modkey, "Control" }, "Right",
@@ -217,7 +217,7 @@ keys.globalkeys = awful.util.table.join(
                     --    end
                     --end
 
-                    awful.spawn.raise_or_spawn('alacritty -e /bin/fish -c "ranger"', {}, function(c)
+                    awful.spawn.raise_or_spawn('alacritty -e /bin/fish -c "ranger"', {}, function()
                         --c.id = 'ranger'
                         --
                         --client.focus = c
@@ -229,7 +229,7 @@ keys.globalkeys = awful.util.table.join(
 
         awful.key({ modkey }, "u",
                 function()
-                    awesome.emit_signal("show_projectmenu")
+                    n('not reserved')
                 end),
 
         awful.key({ }, "F1",
