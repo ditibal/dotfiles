@@ -218,10 +218,6 @@ for key, tag_name in ipairs(tags) do
     })
 end
 
-if gears.filesystem.file_readable(cfg_dir .. "components/projectmenu.lua") then
-    require("components.projectmenu")
-end
-
 local mainTop = require("panels.main.top")
 local mainBottom = require("panels.main.bottom")
 mainTop.create(screen[1])
