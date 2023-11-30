@@ -1,45 +1,10 @@
 local awful = require("awful")
-local table = table
-local gmath = require("gears.math")
 local modalbind = require("lib.modalbind")
 
 modalbind.init()
 
 local keys = {}
 
-function viewidx(i, force)
-    force = force or false
-    local screen = awful.screen.focused()
-    local tags = screen.tags
-    local showntags = {}
-    local sel = screen.selected_tag
-
-    for _, t in ipairs(tags) do
-        if force or (not t.hide and not t.hidden) then
-            table.insert(showntags, t)
-        else
-            if t == sel then
-                table.insert(showntags, t)
-            end
-        end
-    end
-
-    awful.tag.viewnone(screen)
-    for k, t in ipairs(showntags) do
-        if t == sel then
-            showntags[gmath.cycle(#showntags, k + i)].selected = true
-        end
-    end
-    screen:emit_signal("tag::history::update")
-end
-
-function viewnext(force)
-    viewidx(1, force)
-end
-
-function viewprev(force)
-    viewidx(-1, force)
-end
 
 client_buffer = nil
 
@@ -88,12 +53,12 @@ keys.globalkeys = awful.util.table.join(
 
         awful.key({ modkey }, "h",
                 function()
-                    viewprev()
+                    awful.tag.viewprev()
                 end),
 
         awful.key({ modkey }, "l",
                 function()
-                    viewnext()
+                    awful.tag.viewnext()
                 end),
 
         awful.key({ modkey, 'Shift' }, "h",

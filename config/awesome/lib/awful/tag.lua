@@ -1,6 +1,8 @@
 local awful = require("awful")
 local local_tag = require("awful.tag")
 local gtable = require("gears.table")
+local table = table
+local gmath = require("gears.math")
 
 local parent_add = local_tag.add
 function local_tag.add(name, props)
@@ -43,6 +45,40 @@ function local_tag.object.toggle_hide(self)
         next_tag:emit_signal("property::name")
     end
 
+end
+
+function local_tag.viewidx(i, force)
+    force = force or false
+    local screen = awful.screen.focused()
+    local tags = screen.tags
+    local showntags = {}
+    local sel = screen.selected_tag
+
+    for _, t in ipairs(tags) do
+        if force or (not t.hide and not t.hidden) then
+            table.insert(showntags, t)
+        else
+            if t == sel then
+                table.insert(showntags, t)
+            end
+        end
+    end
+
+    awful.tag.viewnone(screen)
+    for k, t in ipairs(showntags) do
+        if t == sel then
+            showntags[gmath.cycle(#showntags, k + i)].selected = true
+        end
+    end
+    screen:emit_signal("tag::history::update")
+end
+
+function local_tag.viewnext(force)
+    local_tag.viewidx(1, force)
+end
+
+function local_tag.viewprev(force)
+    local_tag.viewidx(-1, force)
 end
 
 return local_tag
