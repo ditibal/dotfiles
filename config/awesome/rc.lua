@@ -15,6 +15,7 @@ local naughty = require("naughty")
 local LIP = require("lib.LIP")
 local Storage = require("lib.storage")
 local python = require("python")
+local array = require "lib.luarray"
 
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
@@ -176,46 +177,94 @@ layouts = {
     awful.layout.suit.tile.bottom,
 }
 
-if screen[2] ~= nil then
-    -- Tags
-    tags = {
-        " general ",
-        " general 2 ",
-        " general 3 ",
-        " general 4 ",
-    }
+local tags = array(
+    {
+        label = 'general',
+        screen = 1,
+        group = {'default'},
+    },
+    {
+        label = 'general 2',
+        screen = 1,
+        group = {'default'},
+    },
+    {
+        label = 'discord',
+        screen = 1,
+        group = {'*'},
+    },
+    {
+        label = 'autoshina',
+        screen = 1,
+        group = {'autoshina'},
+    },
+    {
+        label = 'terminal',
+        screen = 1,
+        group = {'autoshina'},
+    },
+    {
+        label = 'webpack',
+        screen = 1,
+        group = {'work', 'shop', 'autoshina'},
+    },
+    {
+        label = 'work',
+        screen = 1,
+        group = {'work'},
+    },
+    {
+        label = 'terminal',
+        screen = 1,
+        group = {'work'},
+    },
+    {
+        label = 'shop',
+        screen = 1,
+        group = {'shop'},
+    },
+    {
+        label = 'terminal',
+        screen = 1,
+        group = {'shop'},
+    },
 
-    for key, tag_name in ipairs(tags) do
-        tag.add(tag_name, {
-            id = key,
-            screen = 2,
+    {
+        label = 'general',
+        screen = 2,
+        group = {'general'},
+    },
+    {
+        label = 'general 2',
+        screen = 2,
+        group = {'general'},
+    },
+    {
+        label = 'general 3',
+        screen = 2,
+        group = {'general'},
+    },
+    {
+        label = 'general 4',
+        screen = 2,
+        group = {'general'},
+    }
+)
+
+ tag.set_group('default')
+
+for i = screen.count(), 1, -1 do
+    screen_tags = tags:filter(function(_, v) return v.screen == i end)
+
+    for k, t in pairs(screen_tags) do
+        tag.add(t.label, {
+            id = k,
+            screen = t.screen,
             layout = layouts[1],
-            selected = key == 1 and true or false,
+            group = t.group,
+            selected = k == 1 and true or false,
         })
     end
-end
-
--- Tags
-tags = {
-    " general ",
-    " general 2 ",
-    " discord ",
-    " autoshina ",
-    "t",
-    " webpack ",
-    " work ",
-    "t",
-    " shop ",
-    "t",
-}
-
-for key, tag_name in ipairs(tags) do
-    tag.add(tag_name, {
-        id = key,
-        screen = 1,
-        layout = layouts[1],
-        selected = key == 1 and true or false,
-    })
 end
 
 local mainTop = require("panels.main.top")

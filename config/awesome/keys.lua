@@ -290,7 +290,7 @@ keys.globalkeys = awful.util.table.join(
 
 keynumber = 0
 for _ = 1, screen.count() do
-    keynumber = math.min(9, math.max(#tags, keynumber));
+    keynumber = 9;
 end
 
 -- Bind all key numbers to tags.
@@ -301,8 +301,7 @@ for i = 1, keynumber do
     -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
             function()
-                local screen = awful.screen.focused()
-                local tag = screen.tags[i]
+                local tag = awful.tag.get_visible_tab_by_id(i)
                 if tag then
                     tag:view_only()
                 end
@@ -311,8 +310,7 @@ for i = 1, keynumber do
     -- Toggle tag display.
         awful.key({ modkey, "Control" }, "#" .. i + 9,
             function()
-                local screen = awful.screen.focused()
-                local tag = screen.tags[i]
+                local tag = awful.tag.get_visible_tab_by_id(i)
                 if tag then
                     awful.tag.viewtoggle(tag)
                 end
@@ -322,7 +320,7 @@ for i = 1, keynumber do
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
             function()
                 if client.focus then
-                    local tag = client.focus.screen.tags[i]
+                    local tag = awful.tag.get_visible_tab_by_id(i)
                     if tag then
                         client.focus:move_to_tag(tag)
                     end
@@ -331,7 +329,7 @@ for i = 1, keynumber do
             { description = "move focused client to tag #" .. i, group = "tag" }),
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
             function()
-                local tag = client.focus.screen.tags[i]
+                local tag = awful.tag.get_visible_tab_by_id(i)
                 tag.hide = not tag.hide
             end,
             { description = "toggle focused client on tag #" .. i, group = "tag" })

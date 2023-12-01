@@ -3,6 +3,7 @@
 from rofi import Rofi
 import os
 
+
 def awesome_restart():
     os.system("awesome-client 'awesome.restart()'")
 
@@ -14,14 +15,38 @@ def awesome_quit():
 def edit_hosts():
     os.system("alacritty -e /bin/nvim /etc/hosts")
 
+
 def help():
     os.system("alacritty -e frogmouth ~/dotfiles/cheatsheet.md")
+
+
+def run_awesome_command(cmd):
+    os.system("awesome-client \"" + cmd + "\"")
+
+
+def switch_tag_group():
+    options = [
+        'Default',
+        'Work',
+        'Autoshina',
+        'Shop',
+    ]
+
+    index, key = rofi.select('Group', options, rofi_args=['-i'])
+
+    if index < 0 or index > len(options):
+        return
+
+    option = options[index].lower()
+
+    run_awesome_command("require('lib.awful.tag').set_group('" + option + "')")
 
 
 def suspend():
     os.system("systemctl suspend")
 
-actions = [
+
+global_actions = [
     {
         'label': 'Restart Awesome',
         'name': 'awesome_restart',
@@ -47,20 +72,24 @@ actions = [
         'name': 'help',
         'action': help,
     },
+    {
+        'label': 'Switch tag group',
+        'name': 'awesome_restart',
+        'action': switch_tag_group,
+    },
 ]
 
 
-def run_action(index):
-    if index >= 0 and index < len(actions):
+def run_action(actions):
+    options = [action['label'] for action in actions]
+    index, key = rofi.select('Run', options, rofi_args=['-i'])
+
+    if 0 <= index < len(actions):
         obj = actions[index]
         action_func = obj['action']
         action_func()
 
 
-def show():
-    r = Rofi()
-    options = [action['label'] for action in actions]
-    index, key = r.select('Run', options, rofi_args=['-i'])
-    run_action(index)
+rofi = Rofi()
 
-show()
+run_action(global_actions)

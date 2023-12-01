@@ -21,6 +21,22 @@ function local_tag.add(name, props)
     return tag
 end
 
+function local_tag.set_group(name)
+    if not name then
+        return
+    end
+
+    local is_need_switch = name ~= local_tag.active_group
+    local_tag.active_group = name
+
+    if is_need_switch then
+        local tag = awful.tag.get_visible_tab_by_id(1)
+        if tag then
+            tag:view_only()
+        end
+    end
+end
+
 function local_tag.object.toggle_hide(self)
     local screen = awful.screen.focused()
     local tags = screen.tags
@@ -44,8 +60,22 @@ function local_tag.object.toggle_hide(self)
         next_tag.hidden = self.hidden
         next_tag:emit_signal("property::name")
     end
-
 end
+
+function local_tag.object.is_hidden(self)
+    if self.hide then
+        return true
+    end
+
+    for _, group_name in pairs(self.group) do
+        if group_name == local_tag.active_group or group_name == '*' then
+            return false
+        end
+    end
+
+    return true
+end
+
 
 function local_tag.viewidx(i, force)
     force = force or false
@@ -79,6 +109,21 @@ end
 
 function local_tag.viewprev(force)
     local_tag.viewidx(-1, force)
+end
+
+function local_tag.get_visible_tab_by_id(id)
+    local screen = awful.screen.focused()
+    local tags = screen.tags
+
+    local visible_tags = {}
+
+    for _, t in ipairs(tags) do
+        if (not t:is_hidden()) then
+            table.insert(visible_tags, t)
+        end
+    end
+
+    return visible_tags[id]
 end
 
 return local_tag

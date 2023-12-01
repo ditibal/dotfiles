@@ -30,10 +30,14 @@ local taglist_buttons = awful.util.table.join(
         end)
 )
 
+function taglist_filter(t)
+    return not t:is_hidden()
+end
+
 taglist.create = function(screen)
     local taglistwidget = awful.widget.taglist {
         screen = screen,
-        filter = awful.widget.taglist.filter.all,
+        filter = taglist_filter,
         buttons = taglist_buttons,
         style = {
             bg_focus = theme.bg_focus,
