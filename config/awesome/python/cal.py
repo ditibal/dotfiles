@@ -1,11 +1,6 @@
 import datetime
 import os
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
@@ -26,63 +21,73 @@ def map_color(color):
 
 
 def build_service():
-    try:
-        creds = None
-        # The file token.json stores the user's access and refresh tokens, and is
-        # created automatically when the authorization flow completes for the first
-        # time.
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from google_auth_oauthlib.flow import InstalledAppFlow
+    from googleapiclient.discovery import build
 
-        token_path =  os.getenv('HOME') + '/token.json'
+    creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
 
-        if os.path.exists(token_path):
-            creds = Credentials.from_authorized_user_file(token_path, SCOPES)
 
-        # If there are no (valid) credentials available, let the user log in.
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(os.getenv('HOME') + '/credentials.json', SCOPES)
-                creds = flow.run_local_server(port=0)
-            # Save the credentials for the next run
-            with open(token_path, 'w') as token:
-                token.write(creds.to_json())
+    local_path = os.getenv('HOME') + '/.local/awesome/calendar'
+    os.makedirs(local_path, exist_ok=True)
+    token_path = local_path + '/token.json'
 
-        return build('calendar', 'v3', credentials=creds)
-    except Exception as error:
-        print('An error occurred: %s' % error)
+    if os.path.exists(token_path):
+        creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(local_path + '/credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open(token_path, 'w') as token:
+            token.write(creds.to_json())
+
+    return build('calendar', 'v3', credentials=creds)
 
 
 class Cal:
     def __init__(self):
+        self.error = None
         self.events = []
         self.calendar_id = 'primary'
-
-        service = build_service()
-        colors = service.colors().get().execute()
-
-        self.event_colors = colors.get('event', [])
-
-        calendar_colors = colors.get('calendar', [])
-        calendar_color_id = service.calendarList().get(calendarId=self.calendar_id).execute().get('colorId')
-        self.calendar_color = calendar_colors.get(calendar_color_id)
-
-        self.fetch_event()
+        self.event_colors = []
 
     def fetch_event(self):
-        service = build_service()
-        # Call the Calendar API
-        now = datetime.datetime.utcnow()
-        timeMin = now.isoformat() + 'Z'
-        timeMax = (now + datetime.timedelta(days=1)).isoformat() + 'Z'
+        try:
+            self.error = None
+            service = build_service()
 
-        events_result = service.events().list(calendarId=self.calendar_id, timeMin=timeMin, timeMax=timeMax,
-                                              maxResults=10, singleEvents=True,
-                                              orderBy='startTime'
-                                              ).execute()
-        events = events_result.get('items', [])
+            if not self.event_colors:
+                colors = service.colors().get().execute()
+                self.event_colors = colors.get('event', [])
+                calendar_colors = colors.get('calendar', [])
+                calendar_color_id = service.calendarList().get(calendarId=self.calendar_id).execute().get('colorId')
+                self.calendar_color = calendar_colors.get(calendar_color_id)
 
-        self.events = events
+            # Call the Calendar API
+            now = datetime.datetime.utcnow()
+            timeMin = now.isoformat() + 'Z'
+            timeMax = (now + datetime.timedelta(days=1)).isoformat() + 'Z'
+
+            events_result = (service.events().list(
+                calendarId=self.calendar_id,
+                timeMin=timeMin, timeMax=timeMax,
+                maxResults=10, singleEvents=True,
+                orderBy='startTime'
+            ).execute())
+            events = events_result.get('items', [])
+
+            self.events = events
+        except Exception as error:
+            self.error = str(error)
 
     def get_color(self, event):
         event_color_id = event.get('colorId')

@@ -46,6 +46,11 @@ Calendar.create = function()
         --    return
         --end
 
+        if Calendar.cal.error then
+            tooltip.text = Calendar.cal.error
+            return
+        end
+
         local event = Calendar.cal.current_event()
         local text = 'Задача:' .. event.name
         text = text .. '\nВремя:' .. event.start_time .. ' - ' .. event.end_time
@@ -61,13 +66,7 @@ Calendar.create = function()
         tooltip.text = text
     end)
 
-    --TODO утечка памяти
-    widget:connect_signal('button::press', function(_, lx, ly, button)
-        --text = Calendar.cal.test(
-        --    function(t) n(t)  end
-        --)
-        --n('end lua')
-
+    widget:connect_signal('button::press', function()
         Calendar.fetch()
         --if button ~= 3 then
         --    return
@@ -85,6 +84,11 @@ Calendar.create = function()
 end
 
 Calendar.update = function()
+    if Calendar.cal.error then
+        Calendar.textWidget:set_markup_silently('Error')
+        Calendar.container.bg = '#d06b64'
+        return
+    end
     local event = Calendar.cal.current_event()
     Calendar.textWidget:set_markup_silently(event.name)
     Calendar.container.bg = event.color
