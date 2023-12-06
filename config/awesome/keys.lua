@@ -33,7 +33,7 @@ local client_map = {
 local tag_map = {
     { "n", function()
         local screen = awful.screen.focused()
-        screen.selected_tag:toggle_hide()
+        screen.selected_tag:toggle_active()
     end, "Toggle tag" },
 }
 

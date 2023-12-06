@@ -5,7 +5,7 @@ local original_taglist_label = awful.widget.taglist.taglist_label
 function awful.widget.taglist.taglist_label(tag, args)
     local text, bg, bg_image, icon, other_args = original_taglist_label(tag, args)
 
-    if tag.hidden then
+    if not tag.active then
         text = '<span color="#4E4E4E"> ' .. text .. '</span>'
     end
 
@@ -26,7 +26,7 @@ local taglist_buttons = awful.util.table.join(
         end),
 
         awful.button({ }, 3, function(tag)
-            tag:toggle_hide()
+            tag:toggle_active()
         end)
 )
 
