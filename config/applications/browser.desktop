@@ -3,6 +3,6 @@ Encoding=UTF-8
 Version=1.0
 Type=Application
 NoDisplay=true
-Exec=default_browser %u
+Exec=default-browser %u
 Name=MyBrowser
 MimeType=x-scheme-handler/application/xhtml+xml;x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/https;x-scheme-handler/http;text/html;
