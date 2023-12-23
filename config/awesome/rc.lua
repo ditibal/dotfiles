@@ -191,7 +191,7 @@ local tags = array(
     {
         label = 'discord',
         screen = 1,
-        group = {'*'},
+        group = {'default', 'work'},
     },
     {
         label = 'autoshina',
