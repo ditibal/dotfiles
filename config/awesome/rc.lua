@@ -232,22 +232,22 @@ local tags = array(
     {
         label = 'general',
         screen = 2,
-        group = {'general'},
+        group = {'*'},
     },
     {
         label = 'general 2',
         screen = 2,
-        group = {'general'},
+        group = {'*'},
     },
     {
         label = 'general 3',
         screen = 2,
-        group = {'general'},
+        group = {'*'},
     },
     {
         label = 'general 4',
         screen = 2,
-        group = {'general'},
+        group = {'*'},
     }
 )
 
