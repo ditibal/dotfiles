@@ -4,24 +4,21 @@ from rofi import Rofi
 import os
 
 
-def awesome_restart():
-    os.system("awesome-client 'awesome.restart()'")
-
-
-def awesome_quit():
-    os.system("awesome-client 'awesome.quit()'")
-
-
-def edit_hosts():
-    os.system("alacritty -e /bin/nvim /etc/hosts")
-
-
-def help():
-    os.system("alacritty -e frogmouth ~/dotfiles/cheatsheet.md")
-
-
 def run_awesome_command(cmd):
     os.system("awesome-client \"" + cmd + "\"")
+
+
+def start_phpstorm(env_name):
+    dir = os.getenv(env_name)
+    if dir is None:
+        rofi.error(f'Не указан путь {env_name}')
+        return
+
+    if not os.path.isdir(dir):
+        rofi.error(f'Неверный путь {env_name}')
+        return
+
+    os.system(f'phpstorm {dir}')
 
 
 def switch_tag_group():
@@ -42,44 +39,6 @@ def switch_tag_group():
     run_awesome_command("require('lib.awful.tag').set_group('" + option + "')")
 
 
-def suspend():
-    os.system("systemctl suspend")
-
-
-global_actions = [
-    {
-        'label': 'Restart Awesome',
-        'name': 'awesome_restart',
-        'action': awesome_restart,
-    },
-    {
-        'label': 'Quit',
-        'name': 'awesome_quit',
-        'action': awesome_quit,
-    },
-    {
-        'label': 'Edit hosts',
-        'name': 'edit_hosts',
-        'action': edit_hosts,
-    },
-    {
-        'label': 'Suspend',
-        'name': 'suspend',
-        'action': suspend,
-    },
-    {
-        'label': 'Help',
-        'name': 'help',
-        'action': help,
-    },
-    {
-        'label': 'Switch tag group',
-        'name': 'awesome_restart',
-        'action': switch_tag_group,
-    },
-]
-
-
 def run_action(actions):
     options = [action['label'] for action in actions]
     index, key = rofi.select('Run', options, rofi_args=['-i'])
@@ -90,6 +49,61 @@ def run_action(actions):
         action_func()
 
 
+global_actions = [
+    {
+        'label': 'Restart Awesome',
+        'name': 'awesome_restart',
+        'action': lambda: os.system("awesome-client 'awesome.restart()'"),
+    },
+    {
+        'label': 'Quit',
+        'name': 'awesome_quit',
+        'action': lambda: os.system("awesome-client 'awesome.quit()'"),
+    },
+    {
+        'label': 'Edit hosts',
+        'name': 'edit_hosts',
+        'action': lambda: os.system("alacritty -e /bin/nvim /etc/hosts"),
+    },
+    {
+        'label': 'Suspend',
+        'name': 'suspend',
+        'action': lambda: os.system("systemctl suspend"),
+    },
+    {
+        'label': 'Help',
+        'name': 'help',
+        'action': lambda: os.system("alacritty -e frogmouth ~/dotfiles/cheatsheet.md"),
+    },
+    {
+        'label': 'Switch tag group',
+        'name': 'awesome_restart',
+        'action': switch_tag_group,
+    },
+    {
+        'label': 'PhpStorm Credit Backend',
+        'action': lambda: start_phpstorm('CRDB_PROJECT_DIR'),
+    },
+    {
+        'label': 'PhpStorm Credit Frontend',
+        'action': lambda: start_phpstorm('CRDF_PROJECT_DIR'),
+    },
+    {
+        'label': 'PhpStorm Shop',
+        'action': lambda: start_phpstorm('SHOP_PROJECT_DIR'),
+    },
+    {
+        'label': 'PhpStorm Autoshina',
+        'action': lambda: start_phpstorm('ATSH_PROJECT_DIR'),
+    },
+    {
+        'label': 'PhpStorm Rembox',
+        'action': lambda: start_phpstorm('RMBX_PROJECT_DIR'),
+    },
+]
+
 rofi = Rofi()
 
 run_action(global_actions)
+
+# run_awesome_command("return require('lib.awful.tag').active_group")
