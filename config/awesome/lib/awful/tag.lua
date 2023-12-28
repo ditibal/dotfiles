@@ -42,6 +42,10 @@ function local_tag.set_group(name)
     end
 end
 
+function local_tag.get_group()
+    return local_tag.active_group
+end
+
 function local_tag.object.toggle_active(self)
     self.active = not self.active
     self:emit_signal("property::name")

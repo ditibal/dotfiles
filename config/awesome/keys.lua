@@ -48,7 +48,7 @@ keys.globalkeys = awful.util.table.join(
         end),
 
         awful.key({ modkey }, ";", function()
-            awful.spawn("actions")
+            awful.spawn.with_shell("python ~/dotfiles/actions/actions.py")
         end),
 
         awful.key({ modkey }, "h",

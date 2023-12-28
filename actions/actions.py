@@ -1,11 +1,7 @@
-#!/bin/python
-
 from rofi import Rofi
 import os
-
-
-def run_awesome_command(cmd):
-    os.system("awesome-client \"" + cmd + "\"")
+import subprocess
+import awesome
 
 
 def start_phpstorm(env_name):
@@ -18,16 +14,11 @@ def start_phpstorm(env_name):
         rofi.error(f'Неверный путь {env_name}')
         return
 
-    os.system(f'phpstorm {dir}')
+    subprocess.Popen(['phpstorm', dir])
 
 
 def switch_tag_group():
-    options = [
-        'Default',
-        'Work',
-        'Autoshina',
-        'Shop',
-    ]
+    options = awesome.get_groups()
 
     index, key = rofi.select('Group', options, rofi_args=['-i'])
 
@@ -35,8 +26,7 @@ def switch_tag_group():
         return
 
     option = options[index].lower()
-
-    run_awesome_command("require('lib.awful.tag').set_group('" + option + "')")
+    awesome.set_group(option)
 
 
 def run_action(actions):
@@ -53,57 +43,71 @@ global_actions = [
     {
         'label': 'Restart Awesome',
         'name': 'awesome_restart',
+        'group': '*',
         'action': lambda: os.system("awesome-client 'awesome.restart()'"),
     },
     {
         'label': 'Quit',
         'name': 'awesome_quit',
+        'group': '*',
         'action': lambda: os.system("awesome-client 'awesome.quit()'"),
     },
     {
         'label': 'Edit hosts',
         'name': 'edit_hosts',
+        'group': '*',
         'action': lambda: os.system("alacritty -e /bin/nvim /etc/hosts"),
     },
     {
         'label': 'Suspend',
         'name': 'suspend',
+        'group': '*',
         'action': lambda: os.system("systemctl suspend"),
     },
     {
         'label': 'Help',
         'name': 'help',
+        'group': '*',
         'action': lambda: os.system("alacritty -e frogmouth ~/dotfiles/cheatsheet.md"),
     },
     {
         'label': 'Switch tag group',
         'name': 'awesome_restart',
+        'group': '*',
         'action': switch_tag_group,
     },
     {
-        'label': 'PhpStorm Credit Backend',
+        'label': 'PhpStorm Backend',
+        'group': 'work',
         'action': lambda: start_phpstorm('CRDB_PROJECT_DIR'),
     },
     {
-        'label': 'PhpStorm Credit Frontend',
+        'label': 'PhpStorm Frontend',
+        'group': 'work',
         'action': lambda: start_phpstorm('CRDF_PROJECT_DIR'),
     },
     {
-        'label': 'PhpStorm Shop',
+        'label': 'PhpStorm',
+        'group': 'shop',
         'action': lambda: start_phpstorm('SHOP_PROJECT_DIR'),
     },
     {
         'label': 'PhpStorm Autoshina',
+        'group': 'autoshina',
         'action': lambda: start_phpstorm('ATSH_PROJECT_DIR'),
     },
     {
         'label': 'PhpStorm Rembox',
+        'group': 'autoshina',
         'action': lambda: start_phpstorm('RMBX_PROJECT_DIR'),
     },
 ]
 
 rofi = Rofi()
 
-run_action(global_actions)
+group_name = awesome.get_group()
 
-# run_awesome_command("return require('lib.awful.tag').active_group")
+global_actions = [action for action in global_actions if action['group'] == group_name or action['group'] == '*']
+global_actions.sort(key=lambda d: d['label'])
+
+run_action(global_actions)
