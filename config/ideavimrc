@@ -49,7 +49,7 @@ map <C-PageUp> :action PreviousTab<CR>
 map <leader>f <Plug>(easymotion-s)
 
 map <leader>d :action Debug<CR>
-map <leader>r :action RenameElement<CR>
+"""map <leader>r :action RenameElement<CR>
 
 map <leader>w :action CloseContent<CR>
 map tw :action CloseContent<CR>
