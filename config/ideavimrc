@@ -65,6 +65,8 @@ map <C-w>h :action PrevSplitter<CR>
 map gh :action Back<CR>
 map gl :action Forward<CR>
 
+vmap gf :action FindSelectionInPath<CR>
+
 map mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
 vmap mu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
 
