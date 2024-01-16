@@ -31,7 +31,7 @@ def switch_tag_group():
 
 def run_action(actions):
     options = [action['label'] for action in actions]
-    index, key = rofi.select('Run', options, rofi_args=['-i'])
+    index, key = rofi.select('Run', options, rofi_args=['-i', '-markup-rows'])
 
     if 0 <= index < len(actions):
         obj = actions[index]
@@ -47,7 +47,7 @@ global_actions = [
         'action': lambda: os.system("awesome-client 'awesome.restart()'"),
     },
     {
-        'label': 'Quit',
+        'label': 'Выход <span size="x-small"><i>(Quit)</i></span>',
         'name': 'awesome_quit',
         'group': '*',
         'action': lambda: os.system("awesome-client 'awesome.quit()'"),
