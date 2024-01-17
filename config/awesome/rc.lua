@@ -206,7 +206,7 @@ local tags = array(
     {
         label = 'webpack',
         screen = 1,
-        group = {'work', 'shop', 'autoshina'},
+        group = {'autoshina'},
     },
     {
         label = 'work',
@@ -219,12 +219,22 @@ local tags = array(
         group = {'work'},
     },
     {
+        label = 'webpack',
+        screen = 1,
+        group = {'work'},
+    },
+    {
         label = 'shop',
         screen = 1,
         group = {'shop'},
     },
     {
         label = 'terminal',
+        screen = 1,
+        group = {'shop'},
+    },
+    {
+        label = 'webpack',
         screen = 1,
         group = {'shop'},
     },
