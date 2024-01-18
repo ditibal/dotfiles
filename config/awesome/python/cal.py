@@ -31,7 +31,6 @@ def build_service():
     # created automatically when the authorization flow completes for the first
     # time.
 
-
     local_path = os.getenv('HOME') + '/.local/awesome/calendar'
     os.makedirs(local_path, exist_ok=True)
     token_path = local_path + '/token.json'

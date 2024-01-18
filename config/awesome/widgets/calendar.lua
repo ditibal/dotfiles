@@ -89,6 +89,7 @@ Calendar.update = function()
         Calendar.container.bg = '#d06b64'
         return
     end
+
     local event = Calendar.cal.current_event()
     Calendar.textWidget:set_markup_silently(event.name)
     Calendar.container.bg = event.color
