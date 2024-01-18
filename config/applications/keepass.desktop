@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Exec=/usr/bin/bash -c "cat ~/keepass-password.file | keepassxc --pw-stdin ~/keepass-passwords.kdbx"
+Exec=/usr/bin/bash -c "cat ~/.local/keepass/keepass-password.file | keepassxc --pw-stdin ~/Sync/keepass/keepass-passwords.kdbx"
 Name=KeePass
 Icon=keepassxc
