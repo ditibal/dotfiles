@@ -49,6 +49,7 @@
 
 - shell:
       - bash -c 'if [ ! -d ~/.tmux/plugins/tpm ]; then git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi'
+      - bash dotbot/init.sh
       - [desktop-file-install --dir=$HOME/.local/share/applications config/applications/keepass.desktop]
       - [desktop-file-install --dir=$HOME/.local/share/applications config/applications/chrome.work.desktop]
       - [desktop-file-install --dir=$HOME/.local/share/applications config/applications/chrome.shop.desktop]
