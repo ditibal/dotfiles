@@ -7,8 +7,6 @@ run() {
 }
 
 run "setxkbmap -layout us,ru -variant -option grp:caps_toggle"
-run "autocutsel -s PRIMARY"
-run "autocutsel -s CLIPBOARD"
 
 if [ "$HOSTNAME" = "laptop" ]; then
     run "xfce4-power-manager --daemon"
