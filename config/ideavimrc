@@ -9,6 +9,8 @@ set easymotion
 set textobj-entire
 set ReplaceWithRegister
 
+set hls
+
 """ Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
 
@@ -56,6 +58,7 @@ map tw :action CloseContent<CR>
 map gw :action ReopenClosedTab<CR>
 map tW :action CloseAllEditorsButActive<CR>
 
+map <leader>eq :nohlsearch<CR>
 
 map <leader>v :action SplitVertically<CR>
 
