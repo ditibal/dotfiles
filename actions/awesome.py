@@ -7,12 +7,9 @@ def run_awesome_command(cmd):
 
 
 def get_groups():
-    return [
-        'Default',
-        'Work',
-        'Autoshina',
-        'Shop',
-    ]
+    output = run_awesome_command("return table.concat(require('lib.awful.tag').get_groups(), ',')")
+    result = re.search(r"string \"(.*)\"", output)
+    return result.group(1).split(',')
 
 
 def set_group(group_name):

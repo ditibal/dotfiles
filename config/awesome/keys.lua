@@ -103,22 +103,22 @@ keys.globalkeys = awful.util.table.join(
 
         awful.key({ modkey, "Control" }, "Right",
                 function()
-                    awful.screen.focus_bydirection('right')
+                    awful.tag.next_group()
                 end),
 
         awful.key({ modkey, "Control" }, "Left",
                 function()
-                    awful.screen.focus_bydirection('left')
+                    awful.tag.prev_group()
                 end),
 
         awful.key({ modkey, "Control" }, "l",
                 function()
-                    awful.screen.focus_bydirection('right')
+                    awful.tag.next_group()
                 end),
 
         awful.key({ modkey, "Control" }, "h",
                 function()
-                    awful.screen.focus_bydirection('left')
+                    awful.tag.prev_group()
                 end),
 
         awful.key({ modkey }, "Tab",

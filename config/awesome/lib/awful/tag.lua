@@ -26,6 +26,57 @@ function local_tag.add(name, props)
     return tag
 end
 
+function local_tag.get_groups()
+    return {
+        'Default',
+        'Work',
+        'Autoshina',
+        'Shop',
+    }
+end
+
+function local_tag.get_next_group()
+    local groups = local_tag.get_groups()
+    local group = local_tag.get_group()
+
+    for i, g in ipairs(groups) do
+        g = string.lower(g)
+        if g == group then
+            if i == #groups then
+                return groups[1]
+            else
+                return groups[i + 1]
+            end
+        end
+    end
+end
+
+function local_tag.get_prev_group()
+    local groups = local_tag.get_groups()
+    local group = local_tag.get_group()
+
+    for i, g in ipairs(groups) do
+        g = string.lower(g)
+        if g == group then
+            if i == 1 then
+                return groups[#groups]
+            else
+                return groups[i - 1]
+            end
+        end
+    end
+end
+
+function local_tag.next_group()
+    local next_group = string.lower(local_tag.get_next_group())
+    local_tag.set_group(next_group)
+end
+
+function local_tag.prev_group()
+    local prev_group = string.lower(local_tag.get_prev_group())
+    local_tag.set_group(prev_group)
+end
+
 function local_tag.set_group(name)
     if not name then
         return
