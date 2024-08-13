@@ -7,6 +7,7 @@ run() {
 }
 
 run "setxkbmap -layout us,ru -variant -option grp:caps_toggle"
+run "synology-drive"
 
 if [ "$HOSTNAME" = "laptop" ]; then
     run "xfce4-power-manager --daemon"
