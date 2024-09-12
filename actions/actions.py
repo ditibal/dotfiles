@@ -47,12 +47,6 @@ global_actions = [
         'action': lambda: os.system("awesome-client 'awesome.restart()'"),
     },
     {
-        'label': 'Выход <span size="x-small"><i>(Quit)</i></span>',
-        'name': 'awesome_quit',
-        'group': '*',
-        'action': lambda: os.system("awesome-client 'awesome.quit()'"),
-    },
-    {
         'label': 'Edit hosts',
         'name': 'edit_hosts',
         'group': '*',
