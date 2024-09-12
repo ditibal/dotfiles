@@ -121,6 +121,26 @@ keys.globalkeys = awful.util.table.join(
                     awful.tag.prev_group()
                 end),
 
+        awful.key({ modkey, "Mod1" }, "Right",
+                function()
+                    awful.screen.focus_bydirection('right')
+                end),
+
+        awful.key({ modkey, "Mod1" }, "Left",
+                function()
+                    awful.screen.focus_bydirection('left')
+                end),
+
+        awful.key({ modkey, "Mod1" }, "l",
+                function()
+                    awful.screen.focus_bydirection('right')
+                end),
+
+        awful.key({ modkey, "Mod1" }, "h",
+                function()
+                    awful.screen.focus_bydirection('left')
+                end),
+
         awful.key({ modkey }, "Tab",
                 function()
                     awful.tag.history.restore()
