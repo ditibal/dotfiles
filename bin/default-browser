@@ -17,10 +17,10 @@ fi
 
 default() {
 	awesome-client 'require("awful.screen").focused().tags[1]:view_only()'
-	firefox "$1"
+	google-chrome-stable "$1"
 }
 
-if [[ $1 =~ "fast-system" ]]; then
+if [[ $1 =~ "fast-system" || $1 =~ "fast.test" ]]; then
 	if [ -z "$WORK_DIR" ]; then
 		notify-send -u critical 'WORK_DIR is not defined'
 		default "$1"
