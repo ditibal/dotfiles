@@ -42,25 +42,20 @@ bottom_panel.create = function(screen)
         screen = screen,
         border_width = 5,
         border_color = beautiful.border_normal,
-        height = 210,
     })
 
     panel:setup {
+        layout = wibox.layout.align.horizontal,
         {
-            layout = wibox.layout.align.horizontal,
-            {
-                layout = wibox.layout.fixed.horizontal,
-                tasklist
-            },
-            nil,
-            {
-                layout = wibox.layout.fixed.horizontal,
-                wibox.widget.systray(),
-                clockwidget,
-            },
+            layout = wibox.layout.fixed.horizontal,
+            tasklist
         },
-        bottom = 175,
-        widget = wibox.container.margin
+        nil,
+        {
+            layout = wibox.layout.fixed.horizontal,
+            wibox.widget.systray(),
+            clockwidget,
+        },
     }
 
     awesome.connect_signal("toggle_panel",
