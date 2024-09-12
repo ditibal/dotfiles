@@ -263,7 +263,7 @@ keys.globalkeys = awful.util.table.join(
                     f = client.focus
                     f:raise()
                     client.focus = nil
-                    awful.spawn("python /home/ditibal/test.py")
+                    awful.spawn("python " .. home_dir .. "/dotfiles/repeat-tmux-last-command.py")
                     client.focus = f
                     f:raise()
                 end),
