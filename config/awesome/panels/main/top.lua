@@ -3,6 +3,17 @@ local awful = require("awful")
 
 local top_panel = {}
 
+
+-- Keyboard map indicator and switcher
+local keyboardlayout = {
+    {
+        widget = awful.widget.keyboardlayout()
+    },
+    right = 10,
+    layout = wibox.container.margin
+}
+
+
 top_panel.create = function(screen)
     local taglist = require('widgets.taglist')
     local expenses = require('widgets.expenses')
@@ -30,6 +41,7 @@ top_panel.create = function(screen)
             require('widgets.network'),
             require('widgets.cpu'),
             audio_output.create(),
+            keyboardlayout,
             require('widgets.volume'),
         },
     }
