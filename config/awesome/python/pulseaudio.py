@@ -1,8 +1,8 @@
 import pulsectl
 
 sinks = {
-    'headphone': 'Quantum 600 Analog Stereo',
-    'speakers': 'Built-in Audio Analog Stereo',
+    'headphone': 'alsa_output.usb-JBL_Quantum_600-00.analog-stereo',
+    'speakers': 'alsa_output.pci-0000_00_1f.3.analog-stereo',
 }
 
 
@@ -24,16 +24,15 @@ class PulseCtr:
 
         for sink_input in self.pulse.sink_list():
             if sink_input.name == default_sink_name:
-                default_sink_description = sink_input.description
+                default_sink_description = sink_input.name
 
         return get_sink_name_by_desc(default_sink_description)
 
     def switch_sink(self):
         desk = self.get_next_sink()
-        print(desk)
 
         for sink in self.pulse.sink_list():
-            if sink.description == desk:
+            if sink.name == desk:
                 self.pulse.default_set(sink)
 
     def get_next_sink(self):
