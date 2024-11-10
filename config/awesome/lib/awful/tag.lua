@@ -17,10 +17,30 @@ function local_tag.add(name, props)
 
     tag.active = active
 
+    if local_tag.groups == nil then
+        local_tag.groups = {}
+    end
+
+    for _, group in ipairs(tag.group) do
+        if local_tag.groups[group] == nil then
+            local_tag.groups[group] = {
+                last_tag = nil
+            }
+        end
+    end
+
     tag:connect_signal("property::active", function()
         tags_visible = storage:get('tags_visible', {})
         tags_visible['screen_' .. tostring(screen_index) .. '_tag_' .. tostring(tag.id)] = tag.active
         storage:set('tags_visible', tags_visible)
+    end)
+
+    tag:connect_signal("property::selected", function()
+        if not tag.selected then
+            return
+        end
+
+        local_tag.groups[local_tag.active_group].last_tag = tag
     end)
 
     return tag
@@ -87,6 +107,11 @@ function local_tag.set_group(name)
 
     if is_need_switch then
         local tag = awful.tag.get_visible_tab_by_id(1)
+
+          if local_tag.groups ~= nil and local_tag.groups[name] ~= nil and local_tag.groups[name].last_tag ~= nil then
+             tag = local_tag.groups[name].last_tag
+          end
+
         if tag then
             tag:view_only()
         end
