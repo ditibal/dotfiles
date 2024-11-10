@@ -15,26 +15,42 @@ if [[ $1 == "set-default" ]]; then
 	exit
 fi
 
-default() {
-	awesome-client 'require("awful.screen").focused().tags[1]:view_only()'
+group=$(awesome-client 'return require("lib.awful.tag").get_group()' | awk -F'"' '{print $2}')
+BROWSER="google-chrome-stable"
+
+if [[ $group == "default" ]]; then
 	google-chrome-stable "$1"
-}
+  exit 0
+fi
 
-if [[ $1 =~ "fast-system" || $1 =~ "fast.test" ]]; then
-	if [ -z "$WORK_DIR" ]; then
-		notify-send -u critical 'WORK_DIR is not defined'
-		default "$1"
-	else
-		awesome-client 'require("awful.screen").focused().tags[7]:view_only()'
-
-		BROWSER="chromium"
-
-		if command -v "google-chrome-stable" &>/dev/null; then
-			BROWSER="google-chrome-stable"
-		fi
+if [[ $group == "work" ]]; then
+    if [ -z "$WORK_DIR" ]; then
+      notify-send -u critical 'WORK_DIR is not defined'
+      exit 1
+    fi
 
 		$BROWSER --user-data-dir=$WORK_DIR/chrome $1
-	fi
-else
-	default "$1"
+  exit 0
 fi
+
+if [[ $group == "shop" ]]; then
+    if [ -z "$SHOP_DIR" ]; then
+      notify-send -u critical 'SHOP_DIR is not defined'
+      exit 1
+    fi
+
+		$BROWSER --user-data-dir=$SHOP_DIR/chrome $1
+  exit 0
+fi
+
+if [[ $group == "ATSH" ]]; then
+    if [ -z "$ATSH_DIR" ]; then
+      notify-send -u critical 'ATSH_DIR is not defined'
+      exit 1
+    fi
+
+		$BROWSER --user-data-dir=$ATSH_DIR/chrome $1
+  exit 0
+fi
+
+google-chrome-stable "$1"
